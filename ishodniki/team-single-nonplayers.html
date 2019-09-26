@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>TITLE</title>
+    <meta name="keywords" content="Ключевые слова" />
+    <meta name="description" content="Описание контента страницы" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/fonts.css" type="text/css" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="libs/owl-carousel/owl.carousel.min.css"> -->
+    <!-- <link rel="stylesheet" href="libs/owl-carousel/owl.theme.default.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script> -->
+    <link rel="stylesheet" id="font-awesome-css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        type="text/css" media="all" />
+    <link rel="stylesheet" href="css/main.css" type="text/css" />
+    <link rel="stylesheet" href="css/media.css" type="text/css" />
+</head>
+
+<body>
+    <!-- Header страницы -->
+    <header>
+
+        <!-- Навигация на моб. устройствах, меньше 576px -->
+        <span class="toggle-button">
+            <div class="menu-bar menu-bar-top"></div>
+            <div class="menu-bar menu-bar-middle"></div>
+            <div class="menu-bar menu-bar-bottom"></div>
+        </span>
+        <div class="menu-wrap">
+            <div class="menu-sidebar">
+                <ul class="menu">
+                    <li class='menu-item'><a href="/">Головна</a></li>
+                    <li class='menu-item current-menu-item'><a href="/news.html">Новини</a></li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Клуб</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/history.html">Історія</a></li>
+                            <li class="menu-item current-menu-item"><a href="/symbolics.html">Символіка</a></li>
+                            <li class="menu-item"><a href="/infrastructure.html">Інфраструктура</a></li>
+                            <li class="menu-item"><a href="/leaderships.html">Керівництво</a></li>
+                            <li class="menu-item"><a href="/pres-sluzhba.html">Прес-служба</a></li>
+                            <li class="menu-item"><a href="/richniy-zvit.html">Річний звіт</a></li>
+                            <li class="menu-item"><a href="/contacts.html">Контакти</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Команда</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-21</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-19</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Матчі</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/matches-calendar.html">Календар</a></li>
+                            <li class="menu-item"><a href="/matches-standings.html">Турнирна таблиця</a></li>
+                            <li class="menu-item"><a href="/matches-scorers.html">Бомбардири</a></li>
+                            <li class="menu-item"><a href="/matches-exluded_players.html">Відсторонення</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="/media.html">Медіа</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/media-foto.html">Фото галерея</a></li>
+                            <li class="menu-item current-menu-item"><a href="/media-video.html">Відео галерея</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="shop.fco.com.ua">Магазин</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="header-top-line">
+            <div class="main-logo">
+                <a href="#">
+                    <img src="img/logo.png" alt="" />
+                    <div class="logo-content">
+                        <h2>ОФІЦІЙНИЙ САЙТ</h2>
+                        <h1>ФУТБОЛЬНИЙ КЛУБ ОЛЕКСАНДРІЯ</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="search-and-social-block">
+                <div class="search">
+                    <form class="search-form " action="">
+                        <input placeholder="Пошук по сайту" class="search-input animate" type="text" id="search-input"
+                            name="search" value="" size="30" maxlength="128" />
+                        <button type="submit" id="search-button" name="" value="Застосувати" class="form-button-submit">
+                            Застосувати
+                        </button>
+                    </form>
+                </div>
+                <div class="social">
+                    <ul class="social-media-links">
+                        <li class="facebook">
+                            <a href="https://www.facebook.com/fcolexandria" target="_blank" rel="nofollow"
+                                title="Facebook">
+                                <div class="social-icon"></div>
+                            </a>
+                        </li>
+                        <li class="youtube_channel">
+                            <a href="http://www.youtube.com/channel/UCHDzcbylV7d69hn1BTnJ_qA/videos" target="_blank"
+                                rel="nofollow" title="Youtube (Канал)">
+                                <div class="social-icon"></div>
+                            </a>
+                        </li>
+                        <li class="instagram">
+                            <a href="http://www.instagram.com/fcolexandria" target="_blank" rel="nofollow"
+                                title="Instagram">
+                                <div class="social-icon"></div>
+                            </a>
+                        </li>
+                        <li class="twitter">
+                            <a href="http://www.twitter.com/FCO1948" target="_blank" rel="nofollow" title="Твітер">
+                                <div class="social-icon"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sponsor">
+                <a href="#">
+                    <img src="img/sponsor.png" alt="" />
+                </a>
+            </div>
+        </div>
+        <!-- Главная Навигация по сайту -->
+        <div class="menu-top-wrap">
+            <nav class="menu-top">
+                <ul class="menu">
+                    <li class='menu-item'><a href="/">Головна</a></li>
+                    <li class='menu-item current-menu-item'><a href="/news.html">Новини</a></li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Клуб</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/history.html">Історія</a></li>
+                            <li class="menu-item current-menu-item"><a href="/symbolics.html">Символіка</a></li>
+                            <li class="menu-item"><a href="/infrastructure.html">Інфраструктура</a></li>
+                            <li class="menu-item"><a href="/leaderships.html">Керівництво</a></li>
+                            <li class="menu-item"><a href="/pres-sluzhba.html">Прес-служба</a></li>
+                            <li class="menu-item"><a href="/richniy-zvit.html">Річний звіт</a></li>
+                            <li class="menu-item"><a href="/contacts.html">Контакти</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Команда</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-21</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-19</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Матчі</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/matches-calendar.html">Календар</a></li>
+                            <li class="menu-item"><a href="/matches-standings.html">Турнирна таблиця</a></li>
+                            <li class="menu-item"><a href="/matches-scorers.html">Бомбардири</a></li>
+                            <li class="menu-item"><a href="/matches-exluded_players.html">Відсторонення</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="/media.html">Медіа</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/media-foto.html">Фото галерея</a></li>
+                            <li class="menu-item current-menu-item"><a href="/media-video.html">Відео галерея</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="shop.fco.com.ua">Магазин</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основное содержимое страниц -->
+    <main>
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb"><a href="/">Головна</a> / <span>Команда / ФК Александрія / Тренери</span> </div>
+        </div>
+        <section class="main-container container">
+            <div class="team-single-header-wrapper">
+                <div class="team-single-header">
+                    <div class="team-single-header-content">
+                        <p class="name">Володимир Богданович</p>
+                        <p class="surname">Шаран</p>
+                        <p class="title">Головний тренер</p>
+                        <p class="birthday">Дата народження (вік)</p>
+                        <p class="birthday-date">18.09.1971 (47)</p>
+                        <p class="civil-title">Громодянство</p>
+                        <p class="civil">Україна</p>
+                    </div>
+                    <div class="team-single-header-img">
+                        <img class="img-responsive" src="/img/people/sharan_big.png" alt="">
+                    </div>
+                </div>
+                <div id="nav-previous" class="team-single-header-nav_perv">
+                    <a href="#">Попередній</a>
+                </div>
+                <div id="nav-next" class="team-single-header-nav_next">
+                    <a href="#">Наступний</a>
+                </div>
+            </div>
+            <div class="team-single-subheader">
+
+            </div>
+            <section class="main-content media_991">
+                <div class="central-content">
+                    <div class="team-central-content">
+                        <strong>Гравець</strong>
+
+<p>Володимир Шаран народився в Маринополі, що на Івано-Франківщині. Вихованець ДЮСШ міста Бурштин і Львівського спортінтернату. Навчався у Львівському державному інституті фізичної культури.</p>
+
+    <p>Розпочинав кар'єру у львівських «Карпатах» у сезоні 1989 року. В сезоні 1991 перейшов до київського «Динамо». У складі динамівців став триразовим чемпіоном України і володарем Кубка України. Грав у багатьох міжнародних турнірах. Зокрема, відзначився забитим м'ячем у ворота празької "Спарти" в рамках групового етапу Ліги Чемпіонів. Виступав за юніорську збірну СРСР і завоював золоті медалі першості Європи 1989. Виступаючи за молодіжну збірну, став третім призером Чемпіонату Світу у 1991 році.</p>
+
+        <p>Згодом виступав за «Дніпро» (Дніпропетровськ) протягом 1995—1997 років, і в 1998—2000 роках повернувся до «Карпат», з якими здобув бронзу чемпіонату України 1998 і став фіналістом Кубка 1999, здобувши путівку до Кубка УЄФА. Свого часу виступав за ФК «Львів». З 2001 по 2003 роки грав за олександрійську «Поліграфтехніку».</p>
+
+            <p>Провів 1 матч за національну збірну України — 11 листопада 1995, в рамках відбіркового циклу до Чемпіонату Європи 1996, проти збірної Італії в Барі (поразка 1:3).</p>
+
+<strong>Тренер</strong>
+
+<p>Працював тренером у командах «Кривбас-2» (Кривий Ріг), «Зірка» (Кіровоград) і «Закарпаття» (Ужгород).</p>
+
+    <p>З січня 2010 року до грудня 2011 очолював ПФК «Олександрія».</p>
+
+        <p>З січня по березень 2012 року - головний тренер львівських «Карпат».</p>
+
+            <p>З 2013 року очолює ФК «Олександрія». Перший та єдиний тренер ФК «Олександрія», який двічі виводив команду в Прем’єр – Лігу України та два сезони поспіль виступала в Лізі Європи УЄФА.</p>
+                    </div>
+                </div>
+                <aside class="right-content">
+                    <div class="widget">
+                        <div class="widget-title widget-title-players-list">
+                            <span>ФК Александрія</span> гравці
+                        </div>
+                        <div class="widget-body widget-body-players-list">
+                            <h3 class="widget-body-players-list-title">Воротарі</h3>
+                            <div class="players-list-block">
+                                <a href="team-single-goalkeeper.html">Рудик</a>
+                                <a href="team-single-goalkeeper.html">Білик</a>
+                                <a href="team-single-goalkeeper.html">Паньків</a>
+                            </div>
+                            <h3 class="widget-body-players-list-title">Захисники</h3>
+                            <div class="players-list-block">
+                                <a href="team-single.html">Шкіндер</a>
+                                <a href="team-single.html">Гура</a>
+                                <a href="team-single.html">Мельник</a>
+                                <a href="team-single.html">Прокопчук</a>
+                                <a href="team-single.html">Соколов</a>
+                                <a href="team-single.html">Кіщук</a>
+                                <a href="team-single.html">Кобеляш</a>
+                                <a href="team-single.html">Глоба</a>
+                                <a href="team-single.html">Шевчук</a>
+                                <a href="team-single.html">Семенов</a>
+                                <a href="team-single.html">Дубенков</a>
+                            </div>
+                            <h3 class="widget-body-players-list-title">Півзахисники</h3>
+                            <div class="players-list-block">
+                                <a href="team-single.html">Костенко</a>
+                                <a href="team-single.html">Литвяк</a>
+                                <a href="team-single.html">Івахно</a>
+                                <a href="team-single.html">Прокопчук</a>
+                                <a href="team-single.html">Пастухов</a>
+                                <a href="team-single.html">Куліш</a>
+                                <a href="team-single.html">Дудка</a>
+                            </div>
+                            <h3 class="widget-body-players-list-title">Нападники</h3>
+                            <div class="players-list-block">
+                                <a href="team-single.html">Родригес Сантана</a>
+                                <a href="team-single.html">Хрієнко</a>
+                                <a href="team-single.html">Устимнко</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="widget">
+                        <div class="widget-title">
+                            Анонс
+                        </div>
+                        <div class="widget-body">
+                            <div class="info-block__body">
+                                <div class="info-block__logo">
+                                    <div class="info-block__logo--tur">
+                                        9-й тур</br>сезон 2019/2020
+                                    </div>
+                                    <img src="img/upl.png" alt="">
+                                </div>
+                                <div class="info-block__meta">
+                                    <span class="info-block__date">
+                                        21 вересня 2019р
+                                    </span>
+                                    <span class="info-block__stadium">
+                                        КСК "Олімпійський", м.Київ
+                                    </span>
+        
+                                </div>
+                                <div class="info-block__kickoff-container">
+                                    <div class="info-block__team-container">
+                                        <span class="info-block__team-title info-block__team-title--home">
+                                            Колос
+                                        </span>
+                                        <div class="info-block__team-img">
+                                            <img src="https://fco.com.ua/sites/default/files/styles/small/public/opponent/desna_0.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="info-block__time">
+                                        <span class="clock-icon"></span>
+                                        <span class="knock_time">21:45</span>
+                                    </div>
+                                    <div class="info-block__team-container">
+                                        <div class="info-block__team-img">
+                                            <img src="https://fco.com.ua/sites/default/files/styles/original/public/opponent/olexandriya.png" alt="">
+                                        </div>
+                                        <span class="info-block__team-title info-block__team-title--away">
+                                            Олександрія
+                                        </span>
+        
+                                    </div>
+                                </div>
+                                <div class="info-block__btn-container">
+                                    <a href="#" class="btn info-block__btn info-block__btn--single">
+                                        <span class="buy-ticket">Купити квіток</span>
+                                    </a>
+                                    <a href="#" class="btn info-block__btn info-block__btn--single">
+                                        <span class="match-center">Матч центр</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </aside>
+            </section>
+        <div class="ads-block-top">
+            <img src="img/banner/baner_na_sayt.jpg" alt="">
+        </div>
+
+
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer>
+        <section class="social-block">
+            <div class="social-item">
+                <a href="https://www.facebook.com/fcolexandria" target="_blank" rel="nofollow">
+                    <div class="social-item-title">
+                        Facebook
+                    </div>
+                    <div class="social-item-content">
+                        <div class="social-item-icon social-item-icon-fb">
+
+                        </div>
+                        <div class="social-item-link">
+                            @fcolexandria
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://www.youtube.com/channel/UCHDzcbylV7d69hn1BTnJ_qA/videos" target="_blank"
+                    rel="nofollow">
+                    <div class="social-item-title">
+                        Youtube
+                    </div>
+                    <div class="social-item-content">
+                        <div class="social-item-icon social-item-icon-yt">
+
+                        </div>
+                        <div class="social-item-link">
+                            @fcolexandriaTV
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://www.instagram.com/fcolexandria" target="_blank" rel="nofollow">
+                    <div class="social-item-title">
+                        Instagram
+                    </div>
+                    <div class="social-item-content">
+                        <div class="social-item-icon social-item-icon-inst">
+
+                        </div>
+                        <div class="social-item-link">
+                            fcolexandria
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://twitter.com/FCO1948" target="_blank" rel="nofollow">
+                    <div class="social-item-title">
+                        Twitter
+                    </div>
+                    <div class="social-item-content">
+                        <div class="social-item-icon social-item-icon-tw">
+
+                        </div>
+                        <div class="social-item-link">
+                            @FCO1948
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <div class="menu-bottom-wrap">
+            <nav class="menu-bottom">
+                <ul class="menu">
+                    <li class='menu-item'><a href="/">Головна</a></li>
+                    <li class='menu-item current-menu-item'><a href="/news.html">Новини</a></li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Клуб</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/history.html">Історія</a></li>
+                            <li class="menu-item current-menu-item"><a href="/symbolics.html">Символіка</a></li>
+                            <li class="menu-item"><a href="/infrastructure.html">Інфраструктура</a></li>
+                            <li class="menu-item"><a href="/leaderships.html">Керівництво</a></li>
+                            <li class="menu-item"><a href="/pres-sluzhba.html">Прес-служба</a></li>
+                            <li class="menu-item"><a href="/richniy-zvit.html">Річний звіт</a></li>
+                            <li class="menu-item"><a href="/contacts.html">Контакти</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Команда</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-21</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-19</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Матчі</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/matches-calendar.html">Календар</a></li>
+                            <li class="menu-item"><a href="/matches-standings.html">Турнирна таблиця</a></li>
+                            <li class="menu-item"><a href="/matches-scorers.html">Бомбардири</a></li>
+                            <li class="menu-item"><a href="/matches-exluded_players.html">Відсторонення</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="/media.html">Медіа</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/media-foto.html">Фото галерея</a></li>
+                            <li class="menu-item current-menu-item"><a href="/media-video.html">Відео галерея</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="shop.fco.com.ua">Магазин</a></li>
+                </ul>
+            </nav>
+        </div>
+        <section class="footer-wrap">
+            <div class="footer">
+                <div class="general-partner">
+                    <h2>
+                        Генеральний спонсор
+                    </h2>
+                    <div class="general-partner-img">
+                        <a href="#" alt="Nike">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer_grey.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer_grey.png)';">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="partners">
+                    <h2>
+                        Партнери
+                    </h2>
+
+
+                    <div class="partners-items-wrap">
+                        <a href="#" alt="Nike">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-gray.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-color.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-gray.png)';">
+                            </div>
+                        </a>
+
+                        <a href="#" alt="Телеканал Футбол">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-gray.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-color.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-gray.png)';">
+                            </div>
+                        </a>
+
+                        <a href="#" alt="Петриківське молоко">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-gray.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-color.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-gray.png)';">
+                            </div>
+                        </a>
+
+                        <a href="#" alt="Стара версія сайту">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_neaktyvne_1.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_aktyvne.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_neaktyvne_1.png)';">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <span class="pull-left">© ФК Олександрія. 2008-2019. Всі права захищено</span>
+                <span class="pull-right">
+                    Розроблено: <a href="isaenko.com.ua" target="_blank" class="lodzhir">
+                        IDV-man
+                    </a>
+                </span>
+            </div>
+
+        </section>
+    </footer>
+
+    <!-- Кнопка возврата наверх -->
+    <div id="back-top" class="back-top"></div>
+
+    <script src="libs/jquery-3.2.1.min.js"></script>
+    <script src="js/common.js"></script>
+</body>
+
+</html>

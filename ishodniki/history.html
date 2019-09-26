@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>TITLE</title>
+    <meta name="keywords" content="Ключевые слова" />
+    <meta name="description" content="Описание контента страницы" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/fonts.css" type="text/css" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="libs/owl-carousel/owl.carousel.min.css"> -->
+    <!-- <link rel="stylesheet" href="libs/owl-carousel/owl.theme.default.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script> -->
+    <link rel="stylesheet" id="font-awesome-css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        type="text/css" media="all" />
+    <link rel="stylesheet" href="css/main.css" type="text/css" />
+    <link rel="stylesheet" href="css/media.css" type="text/css" />
+</head>
+
+<body>
+    <!-- Header страницы -->
+    <header>
+
+        <!-- Навигация на моб. устройствах, меньше 576px -->
+        <span class="toggle-button">
+            <div class="menu-bar menu-bar-top"></div>
+            <div class="menu-bar menu-bar-middle"></div>
+            <div class="menu-bar menu-bar-bottom"></div>
+        </span>
+        <div class="menu-wrap">
+            <div class="menu-sidebar">
+                <ul class="menu">
+                    <li class='menu-item'><a href="/">Головна</a></li>
+                    <li class='menu-item current-menu-item'><a href="/news.html">Новини</a></li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Клуб</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/history.html">Історія</a></li>
+                            <li class="menu-item current-menu-item"><a href="/symbolics.html">Символіка</a></li>
+                            <li class="menu-item"><a href="/infrastructure.html">Інфраструктура</a></li>
+                            <li class="menu-item"><a href="/leaderships.html">Керівництво</a></li>
+                            <li class="menu-item"><a href="/pres-sluzhba.html">Прес-служба</a></li>
+                            <li class="menu-item"><a href="/richniy-zvit">Річний звіт</a></li>
+                            <li class="menu-item"><a href="/contacts.html">Контакти</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Команда</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-21</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-19</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Матчі</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/matches-calendar.html">Календар</a></li>
+                            <li class="menu-item"><a href="/matches-standings.html">Турнирна таблиця</a></li>
+                            <li class="menu-item"><a href="/matches-scorers.html">Бомбардири</a></li>
+                            <li class="menu-item"><a href="/matches-exluded_players.html">Відсторонення</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="/media.html">Медіа</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/media-foto.html">Фото галерея</a></li>
+                            <li class="menu-item current-menu-item"><a href="/media-video.html">Відео галерея</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="shop.fco.com.ua">Магазин</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="header-top-line">
+            <div class="main-logo">
+                <a href="#">
+                    <img src="img/logo.png" alt="" />
+                    <div class="logo-content">
+                        <h4>ОФІЦІЙНИЙ САЙТ</h4>
+                        <h3>ФУТБОЛЬНИЙ КЛУБ ОЛЕКСАНДРІЯ</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="search-and-social-block">
+                <div class="search">
+                    <form class="search-form " action="">
+                        <input placeholder="Пошук по сайту" class="search-input animate" type="text" id="search-input"
+                            name="search" value="" size="30" maxlength="128" />
+                        <button type="submit" id="search-button" name="" value="Застосувати" class="form-button-submit">
+                            Застосувати
+                        </button>
+                    </form>
+                </div>
+                <div class="social">
+                    <ul class="social-media-links">
+                        <li class="facebook">
+                            <a href="https://www.facebook.com/fcolexandria" target="_blank" rel="nofollow"
+                                title="Facebook">
+                                <div class="social-icon"></div>
+                            </a>
+                        </li>
+                        <li class="youtube_channel">
+                            <a href="http://www.youtube.com/channel/UCHDzcbylV7d69hn1BTnJ_qA/videos" target="_blank"
+                                rel="nofollow" title="Youtube (Канал)">
+                                <div class="social-icon"></div>
+                            </a>
+                        </li>
+                        <li class="instagram">
+                            <a href="http://www.instagram.com/fcolexandria" target="_blank" rel="nofollow"
+                                title="Instagram">
+                                <div class="social-icon"></div>
+                            </a>
+                        </li>
+                        <li class="twitter">
+                            <a href="http://www.twitter.com/FCO1948" target="_blank" rel="nofollow" title="Твітер">
+                                <div class="social-icon"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sponsor">
+                <a href="#">
+                    <img src="img/sponsor.png" alt="" />
+                </a>
+            </div>
+        </div>
+        <!-- Главная Навигация по сайту -->
+        <div class="menu-top-wrap">
+            <nav class="menu-top">
+                <ul class="menu">
+                    <li class='menu-item'><a href="/">Головна</a></li>
+                    <li class='menu-item current-menu-item'><a href="/news.html">Новини</a></li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Клуб</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/history.html">Історія</a></li>
+                            <li class="menu-item current-menu-item"><a href="/symbolics.html">Символіка</a></li>
+                            <li class="menu-item"><a href="/infrastructure.html">Інфраструктура</a></li>
+                            <li class="menu-item"><a href="/leaderships.html">Керівництво</a></li>
+                            <li class="menu-item"><a href="/pres-sluzhba.html">Прес-служба</a></li>
+                            <li class="menu-item"><a href="/richniy-zvit">Річний звіт</a></li>
+                            <li class="menu-item"><a href="/contacts.html">Контакти</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Команда</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-21</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-19</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Матчі</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/matches-calendar.html">Календар</a></li>
+                            <li class="menu-item"><a href="/matches-standings.html">Турнирна таблиця</a></li>
+                            <li class="menu-item"><a href="/matches-scorers.html">Бомбардири</a></li>
+                            <li class="menu-item"><a href="/matches-exluded_players.html">Відсторонення</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="/media.html">Медіа</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/media-foto.html">Фото галерея</a></li>
+                            <li class="menu-item current-menu-item"><a href="/media-video.html">Відео галерея</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="shop.fco.com.ua">Магазин</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основное содержимое страниц -->
+    <main>
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb"><a href="/">Головна</a> / <span><span>Клуб /</span> Історія</span></div>
+        </div>
+        <section class="main-container container">
+            <div class="main-header">
+                <div class="main-title" style="background: url(../img/bghistor.jpg);">
+                    <h1>
+                        Історія клубу
+                    </h1>
+
+                    <div class="social-icons">
+                        <a class="facebook_icon social-icon-item" href="#"></a>
+                        <a class="twitter_icon social-icon-item" href="#"></a>
+                    </div>
+                </div>
+                <div class="history-dates">
+                    <div class="history-point">
+                        <div class="history-point-item">
+                            <span>1948</span>
+
+                            <div class="history-point-wrapper">
+                                <div class="history-point-content">
+                                    <p>У цей складний повоєнний час в місті створюється перший футбольний клуб –
+                                        «Шахтар».</p>
+                                </div>
+                                <div class="history-point-logo">
+                                    <img typeof="foaf:Image" class="img-responsive" src="/img/logo_1948.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-point">
+                        <div class="history-point-item">
+                            <span>1990</span>
+
+                            <div class="history-point-wrapper">
+                                <div class="history-point-content">
+                                    <p>На базі місцевого підприємства створений ФК "Поліграфтехніка"</p>
+                                </div>
+                                <div class="history-point-logo">
+                                    <img typeof="foaf:Image" class="img-responsive" src="/img/logo_1990.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-point">
+                        <div class="history-point-item">
+                            <span>2003</span>
+
+                            <div class="history-point-wrapper">
+                                <div class="history-point-content">
+                                    <p>"Поліграфтехніка" перейменована у ПФК "Олександрія"</p>
+                                </div>
+                                <div class="history-point-logo">
+                                    <img typeof="foaf:Image" class="img-responsive" src="/img/logo_2003.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-point">
+                        <div class="history-point-item">
+                            <span>2008</span>
+
+                            <div class="history-point-wrapper">
+                                <div class="history-point-content">
+                                    <p>Створення команди аграріїв олександрійського району - ПФК "УкрАгроКом"</p>
+                                </div>
+                                <div class="history-point-logo">
+                                    <img typeof="foaf:Image" class="img-responsive" src="/img/logo_2008.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-point">
+                        <div class="history-point-item">
+                            <span>2014</span>
+
+                            <div class="history-point-wrapper">
+                                <div class="history-point-content">
+                                    <p>Об'єднання ПФК "Олександрія" та ПФК "УкрАгроКом" в єдиний клуб - ФК "Олександрія"
+                                    </p>
+                                </div>
+                                <div class="history-point-logo">
+                                    <img class="img-responsive" src="/img/logo_2014.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <section class="main-content">
+                <div class="central-content">
+                    <article>
+                        <div class="history-article-img">
+                            <img src="/img/1948_history.jpg" alt="">
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">1948 рік</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p>Олександрія. У цей складний повоєнний час в місті створюється перший футбольний клуб
+                                    – «Шахтар». І з цього року і розпочалася історія олександрійського футболу, коли
+                                    «Шахтар» взяв участь в чемпіонаті України серед команд КФК (колективів фізичної
+                                    культури), але виступав вкрай невдало, посівши в груповому турнірі останнє місце,
+                                    програвши усі сім матчів.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="history-article-img">
+                            <img class="img-responsive" src="/img/1950_history.jpg" alt="">
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">1950-ті</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p>Поступово «гірники» поліпшують свою гру і в 50-х роках минулого століття досягають
+                                    перших успіхів. Олександрійці протягом кількох років виступали в республіканських
+                                    чемпіонатах товариства «Трудові резерви» і ,навіть, ставали чемпіонами та призерами
+                                    чемпіонату. Кілька разів «Шахтар» вигравав і звання чемпіона Кіровоградської
+                                    області.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="history-article-img">
+                            <img class="img-responsive" src="/img/1960_history.jpg" alt="">
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">1960-ті</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p>Починаючи з 1962 року, олександрійці 9 сезонів виступали в класі «Б». Кращим
+                                    показником команди в цей період було 4-те місце в зональних турнірах, яке вони
+                                    посідали двічі (1965 та 1968 р.р.). У класі «Б» з командою працювали відомі фахівці:
+                                    О.Шевцов, Й.Ліфшиць, Г.Балаба, В.Тодоров, Ю.Головей та О.Лярвінський.</p>
+                                <p>
+
+                                    Найбільше матчів у класі «Б» провів А.Бацека – 173. Кращий бомбардир - В.Капінус –
+                                    30 м'ячів. Ю.Панов є рекордсменом команди за сезон – 15 м'ячів (1967р.).</p>
+                            </div>
+                            <div class="history-article-footer">
+                                <div class="article-footer-left-part">
+                                    Кращі гравці «Шахтаря» (1948 – 1990)
+                                </div>
+                                <div class="article-footer-right-part">
+                                    <p>А.Тарара, О.Лярвінський, М.Горовецький, І.Тертишний, В.Абутков, А.Бацека, Володимир та Валентин Барило, М.Водяницький, Г.Іщенко (капітан дубля київського «Динамо» та&nbsp; в майбутньому один з тренерів нашої команди), М.Штулер, Ю.Сприкут, А.Товт, А.Брайченко, М.Лютий, К.Малінін та багато інших.</p> 
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </article>
+                    <article>
+                        <div class="history-article-img">
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">1970-80</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p>Після розформування класу «Б», футболісти «Шахтаря» брали участь в чемпіонатах
+                                    України серед команд КФК (1971 – 1990р.р.) і неодноразово ставали призерами групових
+                                    турнірів. У 1974 році «Шахтар» був фіналістом Кубка України серед команд КФК. Майже
+                                    безмінним тренером команди в цей час був О.Лярвінський, якого в останні два роки
+                                    змінив в минулому гравець «Шахтаря» - А.Конопльов. Кращі вихованці «Шахтаря»
+                                    виступали в чемпіонатах СРСР серед команд вищої ліги: М.Латиш («Шахтар» Донецьк,
+                                    «Динамо» Москва, Спартак» Москва), А.Карпюк («Чорноморець» Одеса), І.Хотян
+                                    («Металіст» Харків), А.Шелест («Дніпро» Дніпропетровськ, «Локомотив» Москва).</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="history-article-img">
+                            <img class="img-responsive" src="/img/1990_history.jpg" alt="">
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">1990 рік</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p>Після розформування «Шахтаря» естафету підхопила «Поліграфтехніка», яка була створена
+                                    на заводі із одноіменною назвою. Вже в 1991 році команда стає переможцем групового
+                                    турніру серед аматорів, а також бронзовим призером фінального турніру в Маріуполі.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="history-article-img">
+                            <img class="img-responsive" src="/img/1991_history.jpg" alt="">
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">1990-ті</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p>«Поліграфтехніка» в першій та вищій лігах (1992 – 2000 .рр.). Бронзовий призер чемпіонатів України в сезонах 1993/1994 та 2000/2001р.р. Бронзовий призер групового турніру 1992 року.</p>
+
+                                <p> <strong>ДОСЯГНЕННЯ ГРАВЦІВ «ПОЛІГРАФТЕХНІКИ»</strong></p>
+                                    
+                                <p>С.Чуйченко кращий футболіст першої ліги в сезонах 1994/1996 та 1995/1996р.р. Кращий бомбардир першої ліги 1993/1994, 1994/1995, 1995/1996 та 2000/2001 р.р. Він же рекордсмен першої ліги за сезон – 36 м'ячів (1995/1996р.р.).</p>
+                                    
+                                <p>Значний внесок в успіхи команди внесли вихованці олександрійського футболу: В.Максімов, О.Казьмін, В.Богатир, Ю.Пугач, Ю.Гура, Б.Босецький, В.Ільєнко, А.Мартиненко, В.Гелеверя та представники інших регіонів області – С.Лактіонов, О.Діброва, К.Сосенко, С.Козаков, М.Шевченко, С.Гасанов, О.Жилін, І.Макогон, О.Михайленко (усі – Кіровоград), С.Боровський (Світловодськ), А.Добрянський (Знам’янка).</p>
+                                    
+                                <p> Із «Поліграфтехнікою» працювали відомі фахівці: О.Іщенко, Ю.Коваль, А.Бузнік, А.Раденко, С.Марусін та Р.Покора.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="history-article-img">
+                            <img class="img-responsive" src="/img/1990_history.jpg" alt="">
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">1990 рік</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p>Чемпіон першої ліги – 2010/2011р.р. Срібний призер – 2013/2014р.р. Бронзовий призер
+                                    2008/2009 та 2012/2013р.р. Срібний призер групового турніру серед команд другої ліги
+                                    в сезоні 2005/2006 р.р. Бронзовий призер 2004/2005 р.р</p>
+
+                                <p><strong>ДОСЯГНЕННЯ ГРАВЦІВ ПФК «ОЛЕКСАНДРІЯ»</strong></p>
+
+                                <p>О.Гребінюк кращий бомбардир групового турніру серед команд другої ліги
+                                    (2005/2006р.р.) – 16 м'ячів.</p>
+
+                                <p>Одним із кращих сезонів для ПФК «Олександрія» був сезон 2010/2011р.р., коли наші
+                                    земляки вперше в своїй історії стали чемпіонами України серед команд першої ліги.
+                                </p>
+
+                                <p>Незабутнім став для команди і сезон 2008/2009р.р., коли олександрійці
+                                    під керівництвом Ю.Коваля завоювали бронзові нагороди чемпіонату, а
+                                    в Кубку України дійшли до 1/4 фіналу, поступившись майбутньому
+                                    володарю Кубка УЄФА донецькому «Шахтарю» на останній хвилині матчу
+                                    1:2.</p>
+
+                                <p>З 2003 ро 2014 р.р. у складі ПФК «Олександрія» виступали
+                                    вихованці олександрійського футболу: О.Нікітін, Р.Локтіонов,
+                                    А.Полярус, Д.Рудик, Б.Боровський, А.Антонов.</p>
+
+                                <p>Тренували команду: Р.Покора, В.Богатир, Ю.Коваль, С.Ковалець,
+                                    В.Шаран, А.Купцов.</p>
+
+                                <p>2008 рік стає точкою відліку для команди аграріїв
+                                    олександрійського району – «УкрАгроКома». Домашні матчі
+                                    проводили на стадіоні «Головківський» місткістю 580
+                                    глядачів, відкритому 12 жовтня 2008 року, а також на
+                                    стадіоні КСК «Ніка» починаючи з 20 липня 2013 року.</p>
+
+                                <p>З 2008 року команда виступала у другій групі першості
+                                    Кіровоградської області, а з 2009 року у чемпіонаті
+                                    Кіровоградської області з футболу.</p>
+
+                                    <p>У травні 2009 року команда завоювала кубок
+                                Кіровоградської області та здобула право виступати у
+                                Кубку ААФУ, в якому дійшла до півфіналу. У
+                                чемпіонаті області 2009 року команда посіла друге
+                                місце.</p>
+
+                                <p>У 2010 році клуб вдруге поспіль виграв кубок
+                                Кіровоградської області, брав участь у Чемпіонаті
+                                ААФУ та Кубку ААФУ. Керівництво клубу оголосило про
+                                намір заявити клуб до другої ліги чемпіонату України
+                                сезону 2010–2011, але клуб не пройшов ліцензування.
+                                У чемпіонаті серед аматорів клуб не вийшов з групи,
+                                а в кубку вилетів на першій стадії, однак здобув
+                                перше в історії звання чемпіона області.</p>
+
+                                <p>Сезон 2011 року команда знову почала із перемоги в
+                                кубку областіта участі в Чемпіонаті серед аматорів.
+                                Через реконструкцію стадіону в Головківці навесні
+                                2011 року команда грала на стадіоні «Олімп» в
+                                Олександрії.</p>
+
+                                <p>20 червня 2011 року рішенням Центральної Ради ПФЛ
+                                команді надано професіональний статус.</p>
+
+                                <p>16 липня 2011 року команда провела перший матч на
+                                професіональному рівні. У матчі першого попереднього
+                                етапу Кубка України головківці вдома здолали
+                                краматорський «Авангард» 2:1 і пройшли до наступного
+                                етапу, де програли в додатковий час запорізькому
+                                «Металургу».</p>
+
+                                <p>23 липня 2011 року «УкрАгроКом» зіграв перший матч у
+                                чемпіонаті України серед команд другої ліги. Удома
+                                команда перемогла хмельницьке «Динамо» з рахунком
+                                3:0. Перший гол команди в чемпіонатах України забив
+                                Андрій Вдовіченков. В тому сезоні команда посіла
+                                5-те місце серед 14 команд Другої ліги групи А.</p>
+
+                                <p>Наступного сезону «УкрАгроКом» у Кубку України знову
+                                зустрівся з запорізьким «Металургом» в 1/16 фіналу і
+                                вперше в історії переміг команду української
+                                Прем'єр-Ліги — головківці перемогли 5:4 в серії
+                                післяматчевих пенальті (основний час завершився
+                                1:1), а на наступному етапі «УкрАгроКом» поступився
+                                одеському «Чорноморцю» з рахунком 1:2. В чемпіонаті
+                                команда була переведена з групи А в групу Б. Команда
+                                стала переможцем Другої ліги групи Б і отримала
+                                право в сезоні 2013/2014 виступати в чемпіонаті
+                                України з футболу серед команд першої ліги «FAVBET
+                                Ліга - 1». В матчі за абсолютне чемпіонство в Другій
+                                лігі команда поступилася за сумою двох матчів
+                                чернігівській «Десні».</p>
+
+                                <p>14 липня 2013 року «УкрАгроКом» зіграв перший матч у
+                                чемпіонаті України серед команд першої ліги «FAVBET
+                                Ліга -1». На виїзді команда поступилася донецькому
+                                «Олімпіку» з рахунком 4:2. Перший гол команди
+                                «УкрАгроКом» в першій лізі забив її капітан
+                                Олександр Батраченко. 24 серпня 2013 року першу
+                                перемогу команда здобула в 5 турі проти ФК «Зірка» з
+                                рахунком 2:0 на стадіоні «Зірка» в Кіровограді -
+                                дубль оформив Олександр Ломко.</p>
+
+                                <p>За підсумками сезона 2013/2014р.р. футболісти
+                                «УкрАгроКома» посіли 8-ме місце в турнірній таблиці
+                                серед команд першої ліги, випередивши такі команди
+                                як: «Геліос» (Харків), «Нива» (Тернопіль), ПФК
+                                «Суми» (Суми), «Буковина» (Чернівці), «Динамо – 2»
+                                (Київ), МФК «Миколаїв» (Миколаїв).</p>
+
+                                <p>Кращий показник команди в Кубку України – вихід до
+                                1/8 фіналу в сезоні 2012/2013р.р.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="history-article-img">
+                            <iframe class="youtube-container--responsive" width="100%" height="100%" src="https://www.youtube.com/embed/-EYq52RnCLM" frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">2014 рік</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p><strong>1 липня 2014 року</strong> сталося об’єднання двох команд ПФК «Олександрія»
+                                    та ПФК «УкрАгроКом» і тепер наше місто в чемпіонаті та Кубку України представляє ФК
+                                    «Олександрія».
+                                    Сьогодні ФК «Олександрія» виступає в найвищому дивізіоні нашої держави - Українській
+                                    Прем'єр - Лізі. </p>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="history-article-img">
+                            <img class="img-responsive" src="/img/2018-2019_history.jpg" alt="">
+                        </div>
+                        <div class="history-article">
+                            <div class="meta">
+                                <div class="year">2018-2019</div>
+                                <div class="meta-more">
+                                    <p>Детальніше</p>
+                                </div>
+                            </div>
+                            <div class="history-article-content">
+                                <p>Бронзовий призер. Українська Прем`єр-Ліга 2018-2019.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+                <aside class="right-content">
+                    <div class="widget">
+                        <div class="widget-title">
+                            Анонс
+                        </div>
+                        <div class="widget-body">
+                            <!-- <div class="info-block-container next-info-block"> -->
+                                
+                                <div class="info-block__body">
+                                    <div class="info-block__logo">
+                                        <div class="info-block__logo--tur">
+                                            9-й тур</br>сезон 2019/2020
+                                        </div>
+                                        <img src="img/upl.png" alt="">
+                                    </div>
+                                    <div class="info-block__meta">
+                                        <span class="info-block__date">
+                                            21 вересня 2019р
+                                        </span>
+                                        <span class="info-block__stadium">
+                                            КСК "Олімпійський", м.Київ
+                                        </span>
+            
+                                    </div>
+                                    <div class="info-block__kickoff-container">
+                                        <div class="info-block__team-container">
+                                            <span class="info-block__team-title info-block__team-title--home">
+                                                Колос
+                                            </span>
+                                            <div class="info-block__team-img">
+                                                <img src="https://fco.com.ua/sites/default/files/styles/small/public/opponent/desna_0.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="info-block__time">
+                                            <span class="clock-icon"></span>
+                                            <span class="knock_time">21:45</span>
+                                        </div>
+                                        <div class="info-block__team-container">
+                                            <div class="info-block__team-img">
+                                                <img src="https://fco.com.ua/sites/default/files/styles/original/public/opponent/olexandriya.png" alt="">
+                                            </div>
+                                            <span class="info-block__team-title info-block__team-title--away">
+                                                Олександрія
+                                            </span>
+            
+                                        </div>
+                                    </div>
+                                    <div class="info-block__btn-container">
+                                        <a href="#" class="btn info-block__btn info-block__btn--single">
+                                            <span class="buy-ticket">Купити квіток</span>
+                                        </a>
+                                        <a href="#" class="btn info-block__btn info-block__btn--single">
+                                            <span class="match-center">Матч центр</span>
+                                        </a>
+                                    </div>
+                                </div>
+            
+                            <!-- </div> -->
+                        </div>
+
+                    </div>
+                </aside>
+            </section>
+        </section>
+
+
+
+
+    </main>
+    <div class="clearfix"></div>
+    <!-- Подвал сайта -->
+    <footer>
+        <section class="social-block">
+            <div class="social-item">
+                <a href="https://www.facebook.com/fcolexandria" target="_blank" rel="nofollow">
+                    <div class="social-item-title">
+                        Facebook
+                    </div>
+                    <div class="social-item-content">
+                        <div class="social-item-icon social-item-icon-fb">
+
+                        </div>
+                        <div class="social-item-link">
+                            @fcolexandria
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://www.youtube.com/channel/UCHDzcbylV7d69hn1BTnJ_qA/videos" target="_blank"
+                    rel="nofollow">
+                    <div class="social-item-title">
+                        Youtube
+                    </div>
+                    <div class="social-item-content">
+                        <div class="social-item-icon social-item-icon-yt">
+
+                        </div>
+                        <div class="social-item-link">
+                            @fcolexandriaTV
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://www.instagram.com/fcolexandria" target="_blank" rel="nofollow">
+                    <div class="social-item-title">
+                        Instagram
+                    </div>
+                    <div class="social-item-content">
+                        <div class="social-item-icon social-item-icon-inst">
+
+                        </div>
+                        <div class="social-item-link">
+                            fcolexandria
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://twitter.com/FCO1948" target="_blank" rel="nofollow">
+                    <div class="social-item-title">
+                        Twitter
+                    </div>
+                    <div class="social-item-content">
+                        <div class="social-item-icon social-item-icon-tw">
+
+                        </div>
+                        <div class="social-item-link">
+                            @FCO1948
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <div class="menu-bottom-wrap">
+            <nav class="menu-bottom">
+                <ul class="menu">
+                    <li class='menu-item'><a href="/">Головна</a></li>
+                    <li class='menu-item current-menu-item'><a href="/news.html">Новини</a></li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Клуб</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/history.html">Історія</a></li>
+                            <li class="menu-item current-menu-item"><a href="/symbolics.html">Символіка</a></li>
+                            <li class="menu-item"><a href="/infrastructure.html">Інфраструктура</a></li>
+                            <li class="menu-item"><a href="/leaderships.html">Керівництво</a></li>
+                            <li class="menu-item"><a href="/pres-sluzhba.html">Прес-служба</a></li>
+                            <li class="menu-item"><a href="/richniy-zvit">Річний звіт</a></li>
+                            <li class="menu-item"><a href="/contacts.html">Контакти</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Команда</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-21</a></li>
+                            <li class="menu-item"><a href="/team-main.html">ФК Олександрія U-19</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">Матчі</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/matches-calendar.html">Календар</a></li>
+                            <li class="menu-item"><a href="/matches-standings.html">Турнирна таблиця</a></li>
+                            <li class="menu-item"><a href="/matches-scorers.html">Бомбардири</a></li>
+                            <li class="menu-item"><a href="/matches-exluded_players.html">Відсторонення</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="/media.html">Медіа</a>
+                        <span class="sidebar-menu-arrow"></span>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="/media-foto.html">Фото галерея</a></li>
+                            <li class="menu-item current-menu-item"><a href="/media-video.html">Відео галерея</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="shop.fco.com.ua">Магазин</a></li>
+                </ul>
+            </nav>
+        </div>
+        <section class="footer-wrap">
+            <div class="footer">
+                <div class="general-partner">
+                    <h2>
+                        Генеральний спонсор
+                    </h2>
+                    <div class="general-partner-img">
+                        <a href="#" alt="Nike">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer_grey.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer_grey.png)';">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="partners">
+                    <h2>
+                        Партнери
+                    </h2>
+
+
+                    <div class="partners-items-wrap">
+                        <a href="#" alt="Nike">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-gray.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-color.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-gray.png)';">
+                            </div>
+                        </a>
+
+                        <a href="#" alt="Телеканал Футбол">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-gray.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-color.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-gray.png)';">
+                            </div>
+                        </a>
+
+                        <a href="#" alt="Петриківське молоко">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-gray.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-color.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-gray.png)';">
+                            </div>
+                        </a>
+
+                        <a href="#" alt="Стара версія сайту">
+                            <div class="partner-img"
+                                style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_neaktyvne_1.png);"
+                                onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_aktyvne.png)';"
+                                onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_neaktyvne_1.png)';">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <span class="pull-left">© ФК Олександрія. 2008-2019. Всі права захищено</span>
+                <span class="pull-right">
+                    Розроблено: <a href="isaenko.com.ua" target="_blank" class="lodzhir">
+                        IDV-man
+                    </a>
+                </span>
+            </div>
+
+        </section>
+    </footer>
+
+    <!-- Кнопка возврата наверх -->
+    <div id="back-top" class="back-top"></div>
+
+    <script src="libs/jquery-3.2.1.min.js"></script>
+    <script src="js/common.js"></script>
+</body>
+
+</html>
