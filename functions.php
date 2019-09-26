@@ -109,8 +109,7 @@ function fco_scripts() {
 	// wp_enqueue_style( 'fco-style', get_stylesheet_uri() );
 	wp_enqueue_style( 'law-normalize', get_template_directory_uri() . '/assets/css/normalize.css' );
 	wp_enqueue_style( 'law-fonts', get_template_directory_uri() . '/assets/css/fonts.css' );
-	wp_enqueue_style( 'law-fontawesome-bootstrap', get_template_directory_uri() . '/assets/css/font-awesome-bootstrap.min.css' );
-	wp_enqueue_style( 'law-fontawesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css' );
+	wp_enqueue_style( 'law-fontawesome-bootstrap', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
 	wp_enqueue_style( 'law-fontawesome', 'https://use.fontawesome.com/releases/v5.3.1/css/all.css' );
 	wp_enqueue_style( 'law-slick', get_template_directory_uri() . '/assets/libs/slick/slick.css' );
 	wp_enqueue_style( 'law-slick-theme', get_template_directory_uri() . '/assets/libs/slick/slick-theme.css' );

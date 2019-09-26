@@ -70,8 +70,8 @@
 </div>
 <div class="header-top-line">
 	<div class="main-logo">
-		<a href="#">
-			<img src="img/logo.png" alt="" />
+		<a href="<? home_url() ?>">
+			<img src="<?=get_template_directory_uri(); ?>/assets/img/logo.png" alt="" />
 			<div class="logo-content">
 				<h4>ОФІЦІЙНИЙ САЙТ</h4>
 				<h3>ФУТБОЛЬНИЙ КЛУБ ОЛЕКСАНДРІЯ</h3>
@@ -118,7 +118,7 @@
 	</div>
 	<div class="sponsor">
 		<a href="#">
-			<img src="img/sponsor.png" alt="" />
+			<img src="<?=get_template_directory_uri(); ?>/assets/img/sponsor.png" alt="" />
 		</a>
 	</div>
 </div>

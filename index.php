@@ -6,7 +6,7 @@ get_header();
 
 
 <div class="ads-block-top">
-	<img src="img/banner/baner_na_sayt.jpg" alt="">
+	<img src="<?=get_template_directory_uri(); ?>/assets/img/banner/baner_na_sayt.jpg" alt="">
 </div>
 <section class="news-block">
 	<h2 class="block-title"><span>Новини</span> клубу</h2>
@@ -20,7 +20,7 @@ get_header();
 			<div class="news-item-media-block">
 				<div class="news-item-image youtube-news">
 					<a href="news-single.html">
-						<img src="https://fco.com.ua/sites/default/files/styles/news_list/public/news/ref_1-min_0_1.jpg"
+						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
 							alt="">
 					</a>
 				</div>
@@ -43,7 +43,7 @@ get_header();
 			<div class="news-item-media-block">
 				<div class="news-item-image foto-news">
 					<a href="news-single.html">
-						<img src="https://fco.com.ua/sites/default/files/styles/news_list/public/news/ref_1-min_0_1.jpg"
+						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
 							alt="">
 					</a>
 				</div>
@@ -66,7 +66,7 @@ get_header();
 			<div class="news-item-media-block">
 				<div class="news-item-image self-news">
 					<a href="news-single.html">
-						<img src="https://fco.com.ua/sites/default/files/styles/news_list/public/news/ref_1-min_0_1.jpg"
+						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
 							alt="">
 					</a>
 				</div>
@@ -89,7 +89,7 @@ get_header();
 			<div class="news-item-media-block">
 				<div class="news-item-image youtube-news">
 					<a href="news-single.html">
-						<img src="https://fco.com.ua/sites/default/files/styles/news_list/public/news/ref_1-min_0_1.jpg"
+						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
 							alt="">
 					</a>
 				</div>
@@ -112,7 +112,7 @@ get_header();
 			<div class="news-item-media-block">
 				<div class="news-item-image youtube-news">
 					<a href="news-single.html">
-						<img src="https://fco.com.ua/sites/default/files/styles/news_list/public/news/ref_1-min_0_1.jpg"
+						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
 							alt="">
 					</a>
 				</div>
@@ -135,7 +135,7 @@ get_header();
 			<div class="news-item-media-block">
 				<div class="news-item-image youtube-news">
 					<a href="news-single.html">
-						<img src="https://fco.com.ua/sites/default/files/styles/news_list/public/news/ref_1-min_0_1.jpg"
+						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
 							alt="">
 					</a>
 				</div>
@@ -158,7 +158,7 @@ get_header();
 			<div class="news-item-media-block">
 				<div class="news-item-image youtube-news">
 					<a href="news-single.html">
-						<img src="https://fco.com.ua/sites/default/files/styles/news_list/public/news/ref_1-min_0_1.jpg"
+						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
 							alt="">
 					</a>
 				</div>
@@ -181,7 +181,7 @@ get_header();
 			<div class="news-item-media-block">
 				<div class="news-item-image youtube-news">
 					<a href="news-single.html">
-						<img src="https://fco.com.ua/sites/default/files/styles/news_list/public/news/ref_1-min_0_1.jpg"
+						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
 							alt="">
 					</a>
 				</div>
