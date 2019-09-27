@@ -66,53 +66,24 @@
 		</div>
 	</section>
 	<div class="menu-bottom-wrap">
-		<nav class="menu-bottom">
-			<ul class="menu">
-				<li class='menu-item'><a href="/">Головна</a></li>
-				<li class='menu-item current-menu-item'><a href="/news.html">Новини</a></li>
-				<li class="menu-item menu-item-has-children">
-					<a href="#">Клуб</a>
-					<span class="sidebar-menu-arrow"></span>
-					<ul class="sub-menu">
-						<li class="menu-item"><a href="/history.html">Історія</a></li>
-						<li class="menu-item current-menu-item"><a href="/symbolics.html">Символіка</a></li>
-						<li class="menu-item"><a href="/infrastructure.html">Інфраструктура</a></li>
-						<li class="menu-item"><a href="/leaderships.html">Керівництво</a></li>
-						<li class="menu-item"><a href="/pres-sluzhba.html">Прес-служба</a></li>
-						<li class="menu-item"><a href="/richniy-zvit.html">Річний звіт</a></li>
-						<li class="menu-item"><a href="/contacts.html">Контакти</a></li>
-					</ul>
-				</li>
-				<li class="menu-item menu-item-has-children">
-					<a href="#">Команда</a>
-					<span class="sidebar-menu-arrow"></span>
-					<ul class="sub-menu">
-						<li class="menu-item"><a href="/team-main.html">ФК Олександрія</a></li>
-						<li class="menu-item"><a href="/team-main.html">ФК Олександрія U-21</a></li>
-						<li class="menu-item"><a href="/team-main.html">ФК Олександрія U-19</a></li>
-					</ul>
-				</li>
-				<li class="menu-item menu-item-has-children">
-					<a href="#">Матчі</a>
-					<span class="sidebar-menu-arrow"></span>
-					<ul class="sub-menu">
-						<li class="menu-item"><a href="/matches-calendar.html">Календар</a></li>
-						<li class="menu-item"><a href="/matches-standings.html">Турнирна таблиця</a></li>
-						<li class="menu-item"><a href="/matches-scorers.html">Бомбардири</a></li>
-						<li class="menu-item"><a href="/matches-exluded_players.html">Відсторонення</a></li>
-					</ul>
-				</li>
-				<li class="menu-item menu-item-has-children">
-					<a href="/media.html">Медіа</a>
-					<span class="sidebar-menu-arrow"></span>
-					<ul class="sub-menu">
-						<li class="menu-item"><a href="/media-foto.html">Фото галерея</a></li>
-						<li class="menu-item current-menu-item"><a href="/media-video.html">Відео галерея</a></li>
-					</ul>
-				</li>
-				<li class="menu-item"><a href="shop.fco.com.ua">Магазин</a></li>
-			</ul>
-		</nav>
+	<?php wp_nav_menu( [
+		'theme_location'  => 'main-menu',
+		'menu'            => 2, 
+		'container'       => 'nav', 
+		'container_class' => 'menu-bottom', 
+		'container_id'    => '',
+		'menu_class'      => 'menu', 
+		'menu_id'         => '',
+		'echo'            => true,
+		'fallback_cb'     => 'wp_page_menu',
+		'before'          => '',
+		'after'           => '',
+		'link_before'     => '',
+		'link_after'      => '',
+		'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
+		'depth'           => 0,
+		'walker'          => '',
+	] ); ?>
 	</div>
 	<section class="footer-wrap">
 		<div class="footer">

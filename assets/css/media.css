@@ -645,6 +645,7 @@
     color: #f3f3f3;
     font-size: 20px;
     position: relative;
+    cursor: pointer;
   }
   .menu-sidebar li ul li {
     padding: 14px 15px 3px;

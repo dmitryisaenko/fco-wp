@@ -1,36 +1,21 @@
 
 $(document).ready(function(){
-    // $('#owl_first').owlCarousel({
-    //     margin:1,
-    //     loop:true,
-    //     autoWidth:true,
-    //     items:2,
-    //     autoplay:true,
-    //     autoplaySpeed: 1000,
-    //     autoplayTimeout:4000,
-    //     autoplayHoverPause:true
-    // });
-
-    
-
-
     // Скрытие/отображение меню для моб. версии
     var $toggleButton = $('.toggle-button'),
     	$menuWrap = $('.menu-wrap'),
-    	$sidebarArrow = $('.sidebar-menu-arrow');
+        $sidebarArrow = $('.sidebar-menu-arrow');
+        $menuItemHasChildren = $('.menu-item-has-children');
 
 	// Hamburger button
-
 	$toggleButton.on('click', function() {
 		$(this).toggleClass('button-open');
         $menuWrap.toggleClass('menu-show');
-        
     });
     
-	// Sidebar navigation arrows
-	$sidebarArrow.click(function() {
-        $sidebarArrow.not(this).next().hide(300);
-        $(this).next().slideToggle(300);
+    //Show sub-menu item in mobile version
+    $menuItemHasChildren.click(function() {
+        $('.sub-menu').hide(300);
+        $(this).children('.sub-menu').toggle(300);
     });
     
     // Отображение полной исторической справки

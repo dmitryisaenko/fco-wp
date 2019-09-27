@@ -326,6 +326,7 @@ header {
   font-size: 18px;
   font-weight: 500;
   padding: 37px;
+  cursor: pointer;
 }
 .menu-top li.menu-item:hover:not(.current-menu-item) {
   background: #1c1d21;
@@ -3372,6 +3373,7 @@ section.footer-wrap {
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 500;
+  cursor: pointer;
   /* position: relative; */
 }
 .menu-bottom li.menu-item:hover:not(.current-menu-item) {
