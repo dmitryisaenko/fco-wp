@@ -42,6 +42,9 @@ if ( ! function_exists( 'fco_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
+		add_image_size('fco-news-logo-1140px', 1140, 9999);
+		add_image_size('fco-news-logo-300px', 300, 200, true);
+
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menu( 'main-menu', 'Меню шаблона' );
 
@@ -296,4 +299,4 @@ function create_book_taxonomies(){
 	));
 }
 
-add_theme_support( 'command', array( 'video', 'gallery' ) );
+add_theme_support( 'post-formats', array( 'video', 'gallery' ) );
