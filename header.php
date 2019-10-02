@@ -4,8 +4,21 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-
+	<? if (is_front_page()) $og_url = home_url(); else $og_url = get_permalink( ); ?>
+	<? if (is_front_page()) $og_img = 'http://fco/wp-content/themes/fco/assets/img/logo.png';
+		elseif (has_post_thumbnail()) $og_img = get_the_post_thumbnail_url('', 'medium' ); 
+		else $og_img = 'http://fco/wp-content/themes/fco/assets/img/logo.png'; ?>
+	<meta property="og:url"           content="<?=$og_url ?>" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="<? (is_front_page()) ? bloginfo( 'name' ) : the_title( ); ?>" />
+	<meta property="og:description"   content="<? bloginfo( 'description ' ); ?>" />
+	<meta property="og:image"         content="<?=$og_img ?>" />
+	
 	<?php wp_head(); ?>
+	<title><?
+		if (is_singular()) bloginfo( 'name' ) . " | " . the_title( );
+		else bloginfo( 'name' ) . " - офіційний сайт";
+	?></title>
 </head>
 
 <body >
@@ -88,8 +101,8 @@
 		</div>
 	</div>
 	<div class="sponsor">
-		<a href="#">
-			<img src="<?=get_template_directory_uri(); ?>/assets/img/sponsor.png" alt="" />
+		<a href="<?=get_theme_mod('fco_main_partner_url');?>" taret="_blank">
+			<img src="<?=get_theme_mod('fco_main_partner_header_img');?>" alt="Main partner" />
 		</a>
 	</div>
 </div>

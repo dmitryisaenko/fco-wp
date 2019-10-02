@@ -92,11 +92,11 @@
 					Генеральний спонсор
 				</h2>
 				<div class="general-partner-img">
-					<a href="#" alt="Nike">
+					<a href="<?=get_theme_mod('fco_main_partner_url');?>" taret="_blank" alt="General Partner">
 						<div class="partner-img"
-							style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer_grey.png);"
-							onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer.png)';"
-							onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/logo_futer_grey.png)';">
+							style="background-image: url(<?=get_theme_mod('fco_main_partner_footer_nonactive_img');?>);"
+							onmouseover="this.style.backgroundImage = 'url(<?=get_theme_mod('fco_main_partner_footer_active_img');?>)';"
+				  			onmouseout="this.style.backgroundImage = 'url(<?=get_theme_mod('fco_main_partner_footer_nonactive_img');?>)';">
 						</div>
 					</a>
 				</div>
@@ -105,40 +105,30 @@
 				<h2>
 					Партнери
 				</h2>
-
-
 				<div class="partners-items-wrap">
-					<a href="#" alt="Nike">
+			<?	
+				$sponsor_string = get_theme_mod('fco_sponsors_order');
+				if (explode(',', $sponsor_string)) $sponsor_order = explode(',', $sponsor_string);
+				else $sponsor_order = [1,2,3,4];
+				// print_r($sponsor_order).'<br>';
+				for ($i=0; $i < 4; $i++) { 
+					$sponsor_number =  $sponsor_order[$i];
+					$url = "fco_sponsors_footer_" . $sponsor_order[$i] . "_url";
+					$alturl = "fco_sponsors_footer_" . $sponsor_order[$i] . "_alturl";
+					$nonactiveImgUrl = "fco_sponsors_footer_" . $sponsor_order[$i] . "_nonactive_img";
+					$activeImgUrl = "fco_sponsors_footer_" . $sponsor_order[$i] . "_active_img";
+					// echo $url.'<br>';
+			?>
+					<a href="<?=get_theme_mod($url);?>" taret="_blank" alt="<?=get_theme_mod($alturl);?>">
 						<div class="partner-img"
-							style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-gray.png);"
-							onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-color.png)';"
-							onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/nike-gray.png)';">
+							style="background-image: url(<?=get_theme_mod($nonactiveImgUrl);?>);"
+							onmouseover="this.style.backgroundImage = 'url(<?=get_theme_mod($activeImgUrl);?>)';"
+							onmouseout="this.style.backgroundImage = 'url(<?=get_theme_mod($nonactiveImgUrl);?>)';">
 						</div>
 					</a>
-
-					<a href="#" alt="Телеканал Футбол">
-						<div class="partner-img"
-							style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-gray.png);"
-							onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-color.png)';"
-							onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/football-channel-gray.png)';">
-						</div>
-					</a>
-
-					<a href="#" alt="Петриківське молоко">
-						<div class="partner-img"
-							style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-gray.png);"
-							onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-color.png)';"
-							onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/milk-gray.png)';">
-						</div>
-					</a>
-
-					<a href="#" alt="Стара версія сайту">
-						<div class="partner-img"
-							style="background-image: url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_neaktyvne_1.png);"
-							onmouseover="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_aktyvne.png)';"
-							onmouseout="this.style.backgroundImage = 'url(https://fco.com.ua/sites/default/files/styles/original/public/banners/staryy_sayt_logo_neaktyvne_1.png)';">
-						</div>
-					</a>
+			<?
+				;}
+			?>
 				</div>
 			</div>
 		</div>

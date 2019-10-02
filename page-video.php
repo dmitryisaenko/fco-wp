@@ -2,10 +2,10 @@
 <!-- Основное содержимое страниц -->
 <main>
     <div class="breadcrumb-wrapper">
-        <div class="breadcrumb"><a href="<? home_url() ?>">Головна</a> / <span><span>Медіа</span></div>
+        <div class="breadcrumb"><a href="/">Головна</a> / <span><span>Медіа</span> / Відео галерея</span></div>
     </div>
     <section class="news-block" id="single-news-page">
-        <h2 class="block-title"><span>Медіа</span> галерея</h2>
+        <h2 class="block-title"><span>Відео</span> галерея</h2>
 
 
         <div class="news-container">
@@ -14,7 +14,7 @@
                 <?php
                 global $post;
 
-                $myposts = get_posts( 'numberposts=16&category=257,258' );
+                $myposts = get_posts( 'numberposts=16&category=258' );
 
                 foreach( $myposts as $post ):
                     {
@@ -54,7 +54,7 @@
                                     <?=get_the_date('d.m.Y'); ?>
                                 </div>
                                 <div class="news-category">
-                                    <?=$category[0]->cat_name; ?>
+                                <?=get_the_category_by_ID(258); ?>
                                 </div>
                             </div>
                         </div>

@@ -6,200 +6,75 @@ get_header();
 
 
 <div class="ads-block-top">
-	<img src="<?=get_template_directory_uri(); ?>/assets/img/banner/baner_na_sayt.jpg" alt="">
+	<a href="<?=get_theme_mod('fco_load_url_shop');?>" taret="_blank">
+		<img src="<?=get_theme_mod('fco_load_baner_shop');?>" alt="">
+	</a>
 </div>
 <section class="news-block">
 	<h2 class="block-title"><span>Новини</span> клубу</h2>
 	<div class="view-news">
 		<div class="view-header">
-			<a href="/news.html">Більше новин</a>
+			<a href="<? home_url() ?>/news">Більше новин</a>
 		</div>
 	</div>
 	<div class="news-container">
-		<div class="w23 news-item">
-			<div class="news-item-media-block">
-				<div class="news-item-image youtube-news">
-					<a href="news-single.html">
-						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
-							alt="">
-					</a>
-				</div>
-				<div class="news-item-meta">
-					<div class="news-date">
-						14.08.2019
-					</div>
-					<div class="news-category">
-						Новини
-					</div>
-				</div>
-			</div>
-			<div class="news-item-title">
-				<span>
-					<a href="#">Матч «Зоря» – «Олександрія» розсудить Микола Балакін</a>
-				</span>
-			</div>
-		</div>
-		<div class="w23 news-item">
-			<div class="news-item-media-block">
-				<div class="news-item-image foto-news">
-					<a href="news-single.html">
-						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
-							alt="">
-					</a>
-				</div>
-				<div class="news-item-meta">
-					<div class="news-date">
-						14.08.2019
-					</div>
-					<div class="news-category">
-						Новини
-					</div>
-				</div>
-			</div>
-			<div class="news-item-title">
-				<span>
-					<a href="#">Матч «Зоря» – «Олександрія» розсудить Микола Балакін</a>
-				</span>
-			</div>
-		</div>
-		<div class="w23 news-item">
-			<div class="news-item-media-block">
-				<div class="news-item-image self-news">
-					<a href="news-single.html">
-						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
-							alt="">
-					</a>
-				</div>
-				<div class="news-item-meta">
-					<div class="news-date">
-						14.08.2019
-					</div>
-					<div class="news-category">
-						Новини
-					</div>
-				</div>
-			</div>
-			<div class="news-item-title">
-				<span>
-					<a href="#">Матч «Зоря» – «Олександрія» розсудить Микола Балакін</a>
-				</span>
-			</div>
-		</div>
-		<div class="w23 news-item">
-			<div class="news-item-media-block">
-				<div class="news-item-image youtube-news">
-					<a href="news-single.html">
-						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
-							alt="">
-					</a>
-				</div>
-				<div class="news-item-meta">
-					<div class="news-date">
-						14.08.2019
-					</div>
-					<div class="news-category">
-						Новини
-					</div>
-				</div>
-			</div>
-			<div class="news-item-title">
-				<span>
-					<a href="#">Матч «Зоря» – «Олександрія» розсудить Микола Балакін</a>
-				</span>
-			</div>
-		</div>
-		<div class="w23 news-item">
-			<div class="news-item-media-block">
-				<div class="news-item-image youtube-news">
-					<a href="news-single.html">
-						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
-							alt="">
-					</a>
-				</div>
-				<div class="news-item-meta">
-					<div class="news-date">
-						14.08.2019
-					</div>
-					<div class="news-category">
-						Новини
-					</div>
-				</div>
-			</div>
-			<div class="news-item-title">
-				<span>
-					<a href="#">Матч «Зоря» – «Олександрія» розсудить Микола Балакін</a>
-				</span>
-			</div>
-		</div>
-		<div class="w23 news-item">
-			<div class="news-item-media-block">
-				<div class="news-item-image youtube-news">
-					<a href="news-single.html">
-						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
-							alt="">
-					</a>
-				</div>
-				<div class="news-item-meta">
-					<div class="news-date">
-						14.08.2019
-					</div>
-					<div class="news-category">
-						Новини
-					</div>
-				</div>
-			</div>
-			<div class="news-item-title">
-				<span>
-					<a href="#">Матч «Зоря» – «Олександрія» розсудить Микола Балакін</a>
-				</span>
-			</div>
-		</div>
-		<div class="w23 news-item">
-			<div class="news-item-media-block">
-				<div class="news-item-image youtube-news">
-					<a href="news-single.html">
-						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
-							alt="">
-					</a>
-				</div>
-				<div class="news-item-meta">
-					<div class="news-date">
-						14.08.2019
-					</div>
-					<div class="news-category">
-						Новини
-					</div>
-				</div>
-			</div>
-			<div class="news-item-title">
-				<span>
-					<a href="#">Матч «Зоря» – «Олександрія» розсудить Микола Балакін</a>
-				</span>
-			</div>
-		</div>
-		<div class="w23 news-item">
-			<div class="news-item-media-block">
-				<div class="news-item-image youtube-news">
-					<a href="news-single.html">
-						<img src="<?=get_template_directory_uri(); ?>/assets/img/news_img_logo.jpg"
-							alt="">
-					</a>
-				</div>
-				<div class="news-item-meta">
-					<div class="news-date">
-						14.08.2019
-					</div>
-					<div class="news-category">
-						Новини
-					</div>
-				</div>
-			</div>
-			<div class="news-item-title">
-				<span>
-					<a href="#">Матч «Зоря» – «Олександрія» розсудить Микола Балакін</a>
-				</span>
-			</div>
-		</div>
+	<?php
+                global $post;
+
+                $myposts = get_posts( 'numberposts=8&offset=1&category=1,257,258' );
+
+                foreach( $myposts as $post ):
+                    {
+                    $category = get_the_category();
+                    setup_postdata( $post );
+                    
+                    if (get_post_format() === "video") $postFormat = 'youtube-news';
+                    elseif (get_post_format() === "gallery") $postFormat = 'foto-news';
+                    else $postFormat = 'self-news';
+                    }
+                ?>
+                    <div class="w23 news-item">
+                        <div class="news-item-media-block">
+                            <div class="news-item-image <?=$postFormat;?>">
+                                <a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>">
+                                    <? if (get_post_format() === "video") {
+                                        $youtube_id = get_field('youtube_link');
+                                        $url = "<img src='https://img.youtube.com/vi/$youtube_id/mqdefault.jpg' style='height:165px;'>";
+                                        echo $url;
+                                    }
+                                    
+                                        else {
+                                            if (has_post_thumbnail()){
+                                                the_post_thumbnail( 'fco-news-logo-300px' );
+                                            }
+                                            else {
+                                                echo "<img src='https://picsum.photos/300/200'>";
+                                            }
+                                        }
+
+                                    
+                                    ?>
+                                </a>
+                            </div>
+                            <div class="news-item-meta">
+                                <div class="news-date">
+                                    <?=get_the_date('j.n.Y'); ?>
+                                </div>
+                                <div class="news-category">
+                                    <?=get_the_category_by_ID(1); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item-title">
+                            <span>
+                                <a href="<?php the_permalink() ?>"
+                                    title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+                            </span>
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
+                <? wp_reset_postdata(); ?>
 	</div>
 </section>
 <section class="info-block-wrap">
@@ -211,7 +86,7 @@ get_header();
 			<div class="info-block__body">
 				<div class="info-block__logo">
 					<div class="info-block__logo--tur">
-						8-й тур</br>сезон 2019/2020
+						8-й тур<br>сезон 2019/2020
 					</div>
 					<img src="img/upl.png" alt="">
 				</div>

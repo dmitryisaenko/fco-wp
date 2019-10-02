@@ -6,6 +6,7 @@
  *
  * @package fco
  */
+ob_start();
 
 if ( ! function_exists( 'fco_setup' ) ) :
 	/**
@@ -43,7 +44,8 @@ if ( ! function_exists( 'fco_setup' ) ) :
 		add_theme_support( 'post-thumbnails' );
 
 		add_image_size('fco-news-logo-1140px', 1140, 9999);
-		add_image_size('fco-news-logo-300px', 300, 200, true);
+		// add_image_size('fco-news-logo-300px', 300, 200, true);
+		add_image_size('fco-news-logo-300px', 274, 166, true);
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menu( 'main-menu', 'Меню шаблона' );
@@ -119,6 +121,7 @@ endif;
 add_action( 'after_setup_theme', 'fco_setup' );
 
 
+
 /**
  * Register widget area.
  *
@@ -126,14 +129,24 @@ add_action( 'after_setup_theme', 'fco_setup' );
  */
 function fco_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'fco' ),
+		'name'          => 'Sidebar',
 		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'fco' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'description'   => '',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="widget-title">',
+		'after_title'   => '</div>',
 	) );
+	register_sidebar( array(
+		'name'          => 'Sidebar для новин',
+		'id'            => 'sidebar-news',
+		'description'   => '',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="widget-title">',
+		'after_title'   => '</div>',
+	) );
+	
 }
 add_action( 'widgets_init', 'fco_widgets_init' );
 
@@ -300,3 +313,70 @@ function create_book_taxonomies(){
 }
 
 add_theme_support( 'post-formats', array( 'video', 'gallery' ) );
+
+//Шорт-коды
+add_shortcode('fco_tags', 'fco_tags_function');
+function fco_tags_function(){
+	$tags = get_the_tag_list('<div class="widget-body"><div class="widget-tags-block"><span>', '</span><span>', '</span></div></div>');
+	return $tags;
+}
+
+add_shortcode('fco_anonse', 'fco_anonse_function');
+function fco_anonse_function(){
+	$return = '<div class="widget-body">
+	<div class="info-block__body">
+		<div class="info-block__logo">
+			<div class="info-block__logo--tur">
+				9-й тур<br>сезон 2019/2020
+			</div>
+			<img src="img/upl.png" alt="">
+		</div>
+		<div class="info-block__meta">
+			<span class="info-block__date">
+				21 вересня 2019р
+			</span>
+			<span class="info-block__stadium">
+				КСК "Олімпійський", м.Київ
+			</span>
+
+		</div>
+		<div class="info-block__kickoff-container">
+			<div class="info-block__team-container">
+				<span class="info-block__team-title info-block__team-title--home">
+					Колос
+				</span>
+				<div class="info-block__team-img">
+					<img src="https://fco.com.ua/sites/default/files/styles/small/public/opponent/desna_0.png" alt="">
+				</div>
+			</div>
+			<div class="info-block__time">
+				<span class="clock-icon"></span>
+				<span class="knock_time">21:45</span>
+			</div>
+			<div class="info-block__team-container">
+				<div class="info-block__team-img">
+					<img src="https://fco.com.ua/sites/default/files/styles/original/public/opponent/olexandriya.png" alt="">
+				</div>
+				<span class="info-block__team-title info-block__team-title--away">
+					Олександрія
+				</span>
+
+			</div>
+		</div>
+		<div class="info-block__btn-container">
+			<a href="#" class="btn info-block__btn info-block__btn--single">
+				<span class="buy-ticket">Купити квіток</span>
+			</a>
+			<a href="#" class="btn info-block__btn info-block__btn--single">
+				<span class="match-center">Матч центр</span>
+			</a>
+		</div>
+	</div>
+</div>';
+    return $return;
+}
+
+include_once('customization.php');
+
+
+ ?>

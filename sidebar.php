@@ -1,17 +1,7 @@
-<?php
-/**
- * The sidebar containing the main widget area
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package fco
- */
+<aside class="right-content">
+    <?php
+    if (in_category(1)) dynamic_sidebar( 'sidebar-news' ); 
+    else dynamic_sidebar( 'sidebar-1' );
+    ?>
+</aside>
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-	return;
-}
-?>
-
-<aside id="secondary" class="widget-area">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside><!-- #secondary -->

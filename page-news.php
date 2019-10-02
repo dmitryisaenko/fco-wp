@@ -36,27 +36,41 @@
             <div class="w100 news-items-wrapper">
 
                 <?php
-                global $post;
+                global $query;
 
-                $myposts = get_posts( 'numberposts=16&offset=1&category=1,257,258' );
+                $args = [
+                    'posts_per_page' => 2,
+                    'order' => 'DESC',
+                    'orderby' => 'date',
+                    'category__in' => '1,257,258'
+                ];
 
-                foreach( $myposts as $post ):
-                    {
+                $query = new WP_Query( $args );
+                the_posts_pagination();
+                // $myposts = get_posts( 'numberposts=2&category=1,257,258' );
+
+                if ( $query->have_posts() ) :
+                    while ( $query->have_posts() ) : 
+                        $query->the_post();
+                
+                
+                // foreach( $myposts as $post ):
+                //     {
                     $category = get_the_category();
-                    setup_postdata( $post );
+                    // setup_postdata( $post );
                     
                     if (get_post_format() === "video") $postFormat = 'youtube-news';
                     elseif (get_post_format() === "gallery") $postFormat = 'foto-news';
                     else $postFormat = 'self-news';
-                    }
-                ?>
+                //     }
+                // ?>
                     <div class="w23 news-item">
                         <div class="news-item-media-block">
                             <div class="news-item-image <?=$postFormat;?>">
                                 <a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>">
                                     <? if (get_post_format() === "video") {
                                         $youtube_id = get_field('youtube_link');
-                                        $url = "<img src='https://img.youtube.com/vi/$youtube_id/mqdefault.jpg' style='height:132px;'>";
+                                        $url = "<img src='https://img.youtube.com/vi/$youtube_id/mqdefault.jpg'>";
                                         echo $url;
                                     }
                                     
@@ -65,7 +79,7 @@
                                                 the_post_thumbnail( 'fco-news-logo-300px' );
                                             }
                                             else {
-                                                echo "<img src='https://picsum.photos/300/200'>";
+                                                echo "<img src='". get_template_directory_uri() . "/assets/img/no-photo-available.jpg' >";
                                             }
                                         }
 
@@ -75,7 +89,7 @@
                             </div>
                             <div class="news-item-meta">
                                 <div class="news-date">
-                                    <?=get_the_date('j.n.Y'); ?>
+                                    <?=get_the_date('d.m.Y'); ?>
                                 </div>
                                 <div class="news-category">
                                     <?=get_the_category_by_ID(1); ?>
@@ -89,12 +103,17 @@
                             </span>
                         </div>
                     </div>
-
-                <?php endforeach; ?>
-                <? wp_reset_postdata(); ?>
+                    <?php endwhile; ?>
+                    <? the_posts_pagination(); ?>
+                
+                    <? wp_reset_postdata(); ?>
+                <?php else : ?>
+                    <p><?php esc_html_e( 'Нет постов по вашим критериям.' ); ?></p>
+                <?php endif; ?>
             </div>
         </div>
     </section>
+    
     <div class="pagination-wrapper">
         <ul class="pagination">
             <li class="pager-first"><a title="До першої сторінки" href="/news">« перша</a></li>
