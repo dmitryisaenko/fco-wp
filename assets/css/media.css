@@ -790,9 +790,7 @@
     width: 22px;
     height: 22px;
   }
-  .pagination-wrapper {
-    display: none;
-  }
+  
   .history-article {
     display: block;
   }
@@ -1209,6 +1207,9 @@
     -ms-flex-item-align: end;
         align-self: flex-end;
     margin-top: 9px;
+  }
+  .pagination-wrapper {
+    display: none;
   }
   .history-article .meta {
     display: block;

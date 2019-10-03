@@ -135,7 +135,7 @@
 		<div class="copyright">
 			<span class="pull-left">© ФК Олександрія. 2008-2019. Всі права захищено</span>
 			<span class="pull-right">
-				Розроблено: <a href="isaenko.com.ua" target="_blank" class="lodzhir">
+				Розроблено: <a href="http://isaenko.com.ua/rd/from-clients-sites-link.php" target="_blank">
 					IDV-man
 				</a>
 			</span>

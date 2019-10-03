@@ -840,24 +840,30 @@ table.abridged-table__responsible td:nth-child(9) {
 .pagination-wrapper {
   text-align: center;
 }
-.pagination {
+.pagination,
+.page-numbers {
   display: inline-block;
   padding-left: 0;
   margin: 20px 0;
   border-radius: 4px;
 }
-.pagination > li {
+.pagination > li,
+.page-numbers > li {
   display: inline;
 }
 .pagination li span,
-.pagination li a {
+.pagination li a,
+.page-numbers li span,
+.page-numbers li a {
   font-size: 14px;
   color: #717378;
   border: 1px solid #ffc934;
   background: transparent;
 }
 .pagination > li > a,
-.pagination > li > span {
+.pagination > li > span,
+.page-numbers > li > a,
+.page-numbers > li > span {
   float: left;
   padding: 6px 12px;
   line-height: 1.42857143;
@@ -868,7 +874,8 @@ table.abridged-table__responsible td:nth-child(9) {
   margin-left: 1px;
   margin-right: 1px;
 }
-.pagination li.pager-first a {
+.pagination li.pager-first a,
+.page-numbers li.pager-first a {
   margin-right: 5px;
   height: 33px;
   width: 68px;
@@ -886,17 +893,22 @@ table.abridged-table__responsible td:nth-child(9) {
   transform: rotate(360deg);
 }
 .pagination > li:first-child > a,
-.pagination > li:first-child > span {
+.pagination > li:first-child > span,
+.page-numbers > li:first-child > a,
+.page-numbers > li:first-child > span {
   margin-left: 0;
 }
 .pagination li span,
-.pagination li a {
+.pagination li a,
+.page-numbers li span,
+.page-numbers li a {
   font-size: 14px;
   color: #717378;
   border: 1px solid #ffc934;
   background: transparent;
 }
-.pagination li.prev a {
+.pagination li.prev a,
+.page-numbers li.prev a {
   margin-right: 10px;
   height: 33px;
   width: 34px;
@@ -914,24 +926,27 @@ table.abridged-table__responsible td:nth-child(9) {
   transform: rotate(360deg);
 }
 .pagination li.active span,
-.pagination li.active a {
+.pagination li.active a,
+.page-numbers li span.current{
   background: #ffc934;
   color: #717378;
   border: 1px solid #ffc934;
-  margin: 0 3px;
+  /* margin: 0 3px; */
 }
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,
 .pagination > .disabled > span:focus,
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
-.pagination > .disabled > a:focus {
+.pagination > .disabled > a:focus,
+.page-numbers li span.dots {
   color: #777777;
   background-color: #ffffff;
   border-color: #dddddd;
   cursor: not-allowed;
 }
-.pagination li.next a {
+.pagination li.next a,
+.page-numbers li.next a {
   margin-left: 10px;
   height: 33px;
   width: 34px;
@@ -948,7 +963,8 @@ table.abridged-table__responsible td:nth-child(9) {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-.pagination li.pager-last a {
+.pagination li.pager-last a
+.page-numbers li.pager-last a {
   margin-left: 5px;
   height: 33px;
   width: 68px;

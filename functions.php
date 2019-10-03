@@ -45,7 +45,7 @@ if ( ! function_exists( 'fco_setup' ) ) :
 
 		add_image_size('fco-news-logo-1140px', 1140, 9999);
 		// add_image_size('fco-news-logo-300px', 300, 200, true);
-		add_image_size('fco-news-logo-300px', 274, 166, true);
+		add_image_size('fco-news-logo-300px', 274, 156, true);
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menu( 'main-menu', 'Меню шаблона' );
@@ -377,6 +377,99 @@ function fco_anonse_function(){
 }
 
 include_once('customization.php');
+
+// удаляет H2 из шаблона пагинации
+add_filter('navigation_markup_template', 'my_navigation_template', 10, 2 );
+function my_navigation_template( $template, $class ){
+	/*
+	Вид базового шаблона:
+	<nav class="navigation %1$s" role="navigation">
+		<h2 class="screen-reader-text">%2$s</h2>
+		<div class="nav-links">%3$s</div>
+	</nav>
+	*/
+
+	return '
+	<nav class="pagination-wrapper" role="navigation">
+		%3$s
+	</nav>    
+	';
+}
+
+//Вывод превью записей по заданным критериям + пагинация
+function fco_view_items($cat, $number_posts, $user_cat){
+	global $wp_query;
+
+	$args = array(
+		'posts_per_page' => $number_posts,
+		'order' => 'DESC',
+		'orderby' => 'date',
+		'cat' => $cat,
+		'paged' => get_query_var('paged') ?: 1
+	);
+
+	$wp_query = new WP_Query( $args );
+
+	if ( $wp_query->have_posts() ){
+		while ( $wp_query->have_posts() ) {
+			$wp_query->the_post();
+			
+			if ($user_cat == '') {
+				$category = get_the_category();
+				$cat_name = $category[0]->cat_name;
+			}
+			else $cat_name = get_the_category_by_ID($user_cat);
+			
+			if (get_post_format() === "video") $postFormat = 'youtube-news';
+			elseif (get_post_format() === "gallery") $postFormat = 'foto-news';
+			else $postFormat = 'self-news';
+
+			echo '<div class="w23 news-item">';
+			echo '	<div class="news-item-media-block">';
+			echo '		<div class="news-item-image <?=$postFormat;?>">';
+			echo '			<a href="' . get_the_permalink() . '" title="' . get_the_title() . '">';
+							if (get_post_format() === "video") {
+								$youtube_id = get_field('youtube_link');
+								echo "<img src='https://img.youtube.com/vi/$youtube_id/mqdefault.jpg'>";
+							}
+							else {
+								if (has_post_thumbnail()){
+									the_post_thumbnail( 'fco-news-logo-300px' );
+								}
+								else {
+									echo "<img src='". get_template_directory_uri() . "/assets/img/no-photo-available.jpg' >";
+								}
+							}
+			echo '			</a>';
+			echo '		</div>';
+			echo '		<div class="news-item-meta">';
+			echo '			<div class="news-date">';
+							echo get_the_date('d.m.Y');
+			echo '			</div>';
+			echo '			<div class="news-category">';
+							echo $cat_name;
+			echo '			</div>';
+			echo '		</div>';
+			echo '	</div>';
+			echo '	<div class="news-item-title">';
+			echo '		<span>';
+			echo '			<a href="' . get_the_permalink() . '"';
+			echo '				title="' . get_the_title() . '">' . get_the_title() . '</a>';
+			echo '		</span>';
+			echo '	</div>';
+			echo '</div>';
+		} //endwhile
+	} //endif
+	else echo "<p>Нет постов по вашим критериям</p>";
+}
+
+function fco_pagination(){
+	the_posts_pagination(
+		array(
+			'type' => 'list'
+			)
+		); 
+}
 
 
  ?>
