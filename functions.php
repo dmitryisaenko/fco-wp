@@ -47,13 +47,17 @@ if ( ! function_exists( 'fco_setup' ) ) :
 		// add_image_size('fco-news-logo-300px', 300, 200, true);
 		add_image_size('fco-news-logo-300px', 274, 156, true);
 		add_image_size('fco-players-logo-big', 9999, 380);
-		add_image_size('fco-players-logo-small', 230, 9999);
+		add_image_size('fco-players-logo-small', 9999, 220);
 
 		//Фильтр, который НЕ загружает указанные размеры изображений для указанных типов постов:
 		add_filter( 'intermediate_image_sizes_advanced', function( $sizes ){
 			if( isset( $_REQUEST['post_id'] ) && 'post' == get_post_type($_REQUEST['post_id'] ) ) {
 				unset( $sizes['fco-players-logo-big'] );
 				unset( $sizes['fco-players-logo-small'] );
+			}
+			if( isset( $_REQUEST['post_id'] ) && 'team' == get_post_type($_REQUEST['post_id'] ) ) {
+				unset( $sizes['fco-news-logo-1140px'] );
+				unset( $sizes['fco-news-logo-300px'] );
 			}
 			return $sizes;
 		 
@@ -262,7 +266,7 @@ function register_post_types(){
 		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
 		'hierarchical'        => true,
-		'supports'            => [ 'title', 'editor','thumbnail' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'supports'            => [ 'title', 'editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
 		'taxonomies'          => ['team'],
 		'has_archive'         => false,
 		// 'rewrite'             => array('slug' => 'team'),
@@ -332,6 +336,43 @@ function create_team_taxonomies(){
 }
 
 add_theme_support( 'post-formats', array( 'video', 'gallery' ) );
+
+//Делаем возможность фильтровать записи с дополнительными фильтрами (таксономией):
+function filter_cars_by_taxonomies( $post_type, $which ) {
+
+	// Apply this only on a specific post type
+	if ( 'team' !== $post_type )
+		return;
+
+	// A list of taxonomy slugs to filter by
+	$taxonomies = array( 'age-group', 'role', 'player_category' );
+
+	foreach ( $taxonomies as $taxonomy_slug ) {
+
+		// Retrieve taxonomy data
+		$taxonomy_obj = get_taxonomy( $taxonomy_slug );
+		$taxonomy_name = $taxonomy_obj->labels->all_items;
+
+		// Retrieve taxonomy terms
+		$terms = get_terms( $taxonomy_slug );
+
+		// Display filter HTML
+		echo "<select name='{$taxonomy_slug}' id='{$taxonomy_slug}' class='postform'>";
+		echo '<option value="">' . $taxonomy_name . '</option>';
+		foreach ( $terms as $term ) {
+			printf(
+				'<option value="%1$s" %2$s>%3$s (%4$s)</option>',
+				$term->slug,
+				( ( isset( $_GET[$taxonomy_slug] ) && ( $_GET[$taxonomy_slug] == $term->slug ) ) ? ' selected="selected"' : '' ),
+				$term->name,
+				$term->count
+			);
+		}
+		echo '</select>';
+	}
+
+}
+add_action( 'restrict_manage_posts', 'filter_cars_by_taxonomies' , 10, 2);
 
 //Шорт-коды
 add_shortcode('fco_tags', 'fco_tags_function');
@@ -490,6 +531,24 @@ function fco_pagination(){
 			)
 		); 
 }
+
+
+ //Removes media buttons from post types.
+add_filter( 'wp_editor_settings', function( $settings ) {
+    $current_screen = get_current_screen();
+
+    // Post types for which the media buttons should be removed.
+    $post_types = array( 'team' );
+
+    // Bail out if media buttons should not be removed for the current post type.
+    if ( ! $current_screen || ! in_array( $current_screen->post_type, $post_types, true ) ) {
+        return $settings;
+    }
+
+    $settings['media_buttons'] = false;
+
+    return $settings;
+} );
 
 
  ?>
