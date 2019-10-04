@@ -18,64 +18,15 @@ get_header();
 		</div>
 	</div>
 	<div class="news-container">
-	<?php
-                global $post;
+            <div class="w100 news-items-wrapper">
 
-                $myposts = get_posts( 'numberposts=8&offset=1&category=1,257,258' );
-
-                foreach( $myposts as $post ):
-                    {
-                    $category = get_the_category();
-                    setup_postdata( $post );
-                    
-                    if (get_post_format() === "video") $postFormat = 'youtube-news';
-                    elseif (get_post_format() === "gallery") $postFormat = 'foto-news';
-                    else $postFormat = 'self-news';
-                    }
-                ?>
-                    <div class="w23 news-item">
-                        <div class="news-item-media-block">
-                            <div class="news-item-image <?=$postFormat;?>">
-                                <a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>">
-                                    <? if (get_post_format() === "video") {
-                                        $youtube_id = get_field('youtube_link');
-                                        $url = "<img src='https://img.youtube.com/vi/$youtube_id/mqdefault.jpg' style='height:165px;'>";
-                                        echo $url;
-                                    }
-                                    
-                                        else {
-                                            if (has_post_thumbnail()){
-                                                the_post_thumbnail( 'fco-news-logo-300px' );
-                                            }
-                                            else {
-                                                echo "<img src='https://picsum.photos/300/200'>";
-                                            }
-                                        }
-
-                                    
-                                    ?>
-                                </a>
-                            </div>
-                            <div class="news-item-meta">
-                                <div class="news-date">
-                                    <?=get_the_date('j.n.Y'); ?>
-                                </div>
-                                <div class="news-category">
-                                    <?=get_the_category_by_ID(1); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="news-item-title">
-                            <span>
-                                <a href="<?php the_permalink() ?>"
-                                    title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-                            </span>
-                        </div>
-                    </div>
-
-                <?php endforeach; ?>
-                <? wp_reset_postdata(); ?>
-	</div>
+                <!-- (Из какой(-их) категории, Кол-во постов на странице, Какой категорией подписывать превьюшки)  -->
+                <? fco_view_items("1,257,258", 8, 1); ?> 
+                
+            </div>
+        </div>
+        <? wp_reset_query(); ?> 
+	    <? wp_reset_postdata(); ?>
 </section>
 <section class="info-block-wrap">
 	<div class="info-block">

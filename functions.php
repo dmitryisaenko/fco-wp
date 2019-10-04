@@ -46,7 +46,19 @@ if ( ! function_exists( 'fco_setup' ) ) :
 		add_image_size('fco-news-logo-1140px', 1140, 9999);
 		// add_image_size('fco-news-logo-300px', 300, 200, true);
 		add_image_size('fco-news-logo-300px', 274, 156, true);
+		add_image_size('fco-players-logo-big', 9999, 380);
+		add_image_size('fco-players-logo-small', 230, 9999);
 
+		//Фильтр, который НЕ загружает указанные размеры изображений для указанных типов постов:
+		add_filter( 'intermediate_image_sizes_advanced', function( $sizes ){
+			if( isset( $_REQUEST['post_id'] ) && 'post' == get_post_type($_REQUEST['post_id'] ) ) {
+				unset( $sizes['fco-players-logo-big'] );
+				unset( $sizes['fco-players-logo-small'] );
+			}
+			return $sizes;
+		 
+		} );
+		
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menu( 'main-menu', 'Меню шаблона' );
 
@@ -218,19 +230,19 @@ function fco_register_required_plugins() {
 
 add_action( 'init', 'register_post_types' );
 function register_post_types(){
-	register_post_type('command', array(
+	register_post_type('team', array(
 		'label'  => null,
 		'labels' => array(
-			'name'               => 'Команда', // основное название для типа записи
-			'singular_name'      => 'команда', // название для одной записи этого типа
-			'add_new'            => 'Добавить команда', // для добавления новой записи
-			'add_new_item'       => 'Добавление команда', // заголовка у вновь создаваемой записи в админ-панели.
-			'edit_item'          => 'Редактирование команда', // для редактирования типа записи
-			'new_item'           => 'Новое команда', // текст новой записи
-			'view_item'          => 'Смотреть команда', // для просмотра записи этого типа.
-			'search_items'       => 'Искать команда', // для поиска по этим типам записи
-			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
-			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+			'name'               => 'Учасники команди', // основное название для типа записи
+			'singular_name'      => 'Команда', // название для одной записи этого типа
+			'add_new'            => 'Додати учасника', // для добавления новой записи
+			'add_new_item'       => 'Додати учасника', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редагувати дані учасника', // для редактирования типа записи
+			'new_item'           => 'Новий учасник', // текст новой записи
+			'view_item'          => 'Учасники', // для просмотра записи этого типа.
+			'search_items'       => 'Шукати учасника', // для поиска по этим типам записи
+			'not_found'          => 'Не знайдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не знайдено в корзині', // если не было найдено в корзине
 			'parent_item_colon'  => '', // для родителей (у древовидных типов)
 			'menu_name'          => 'Команда', // название меню
 		),
@@ -245,70 +257,77 @@ function register_post_types(){
 		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
 		'rest_base'           => null, // $post_type. C WP 4.7
 		'menu_position'       => null,
-		'menu_icon'           => null, 
+		'menu_icon'           => 'dashicons-admin-users', 
 		//'capability_type'   => 'post',
 		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
-		'hierarchical'        => false,
-		'supports'            => [ 'title', 'editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-		'taxonomies'          => [],
+		'hierarchical'        => true,
+		'supports'            => [ 'title', 'editor','thumbnail' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => ['team'],
 		'has_archive'         => false,
-		'rewrite'             => true,
+		// 'rewrite'             => array('slug' => 'team'),
 		'query_var'           => true,
 	) );
 }
 
-// хук, через который подключается функция
-// регистрирующая новые таксономии (create_book_taxonomies)
-add_action( 'init', 'create_book_taxonomies' );
+add_action( 'init', 'create_team_taxonomies' );
 
-// функция, создающая 2 новые таксономии "genres" и "writers" для постов типа "book"
-function create_book_taxonomies(){
-
-	// Добавляем древовидную таксономию 'genre' (как категории)
-	register_taxonomy('genre', array('command'), array(
+function create_team_taxonomies(){
+	register_taxonomy('age-group', array('team'), array(
 		'hierarchical'  => true,
 		'labels'        => array(
-			'name'              => _x( 'Genres', 'taxonomy general name' ),
-			'singular_name'     => _x( 'Genre', 'taxonomy singular name' ),
-			'search_items'      =>  __( 'Search Genres' ),
-			'all_items'         => __( 'All Genres' ),
-			'parent_item'       => __( 'Parent Genre' ),
-			'parent_item_colon' => __( 'Parent Genre:' ),
-			'edit_item'         => __( 'Edit Genre' ),
-			'update_item'       => __( 'Update Genre' ),
-			'add_new_item'      => __( 'Add New Genre' ),
-			'new_item_name'     => __( 'New Genre Name' ),
-			'menu_name'         => __( 'Genre' ),
+			'name'              => 'Вікова група',
+			'singular_name'     => 'Вікова група',
+			'search_items'      => 'Пошук групи',
+			'all_items'         => 'Усі групи',
+			'edit_item'         => 'Редагувати групу',
+			'update_item'       => 'Оновити групу',
+			'add_new_item'      => 'Додати групу',
+			'new_item_name'     => 'Нова група',
+			'menu_name'         => 'Вікова група',
 		),
 		'show_ui'       => true,
+		// 'show_in_menu'	=> false,
 		'query_var'     => true,
-		//'rewrite'       => array( 'slug' => 'the_genre' ), // свой слаг в URL
+		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
+	));
+	
+	register_taxonomy('role', array('team'), array(
+		'hierarchical'  => true,
+		'labels'        => array(
+			'name'              => 'Роль',
+			'singular_name'     => 'Роль',
+			'search_items'      => 'Пошук ролі',
+			'all_items'         => 'Усі ролі',
+			'edit_item'         => 'Редагувати роль',
+			'update_item'       => 'Оновити роль',
+			'add_new_item'      => 'Додати роль',
+			'new_item_name'     => 'Нова роль',
+			'menu_name'         => 'Роль',
+		),
+		'show_ui'       => true,
+		// 'show_in_menu'	=> false,
+		'query_var'     => true,
+		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
 	));
 
-	// Добавляем НЕ древовидную таксономию 'writer' (как метки)
-	register_taxonomy('writer', 'command',array(
-		'hierarchical'  => false,
+	register_taxonomy('player_category', array('team'), array(
+		'hierarchical'  => true,
 		'labels'        => array(
-			'name'                        => _x( 'Writers', 'taxonomy general name' ),
-			'singular_name'               => _x( 'Writer', 'taxonomy singular name' ),
-			'search_items'                =>  __( 'Search Writers' ),
-			'popular_items'               => __( 'Popular Writers' ),
-			'all_items'                   => __( 'All Writers' ),
-			'parent_item'                 => null,
-			'parent_item_colon'           => null,
-			'edit_item'                   => __( 'Edit Writer' ),
-			'update_item'                 => __( 'Update Writer' ),
-			'add_new_item'                => __( 'Add New Writer' ),
-			'new_item_name'               => __( 'New Writer Name' ),
-			'separate_items_with_commas'  => __( 'Separate writers with commas' ),
-			'add_or_remove_items'         => __( 'Add or remove writers' ),
-			'choose_from_most_used'       => __( 'Choose from the most used writers' ),
-			'menu_name'                   => __( 'Writers' ),
+			'name'              => 'Категорія гравця',
+			'singular_name'     => 'Категорія гравця',
+			'search_items'      => 'Пошук категорії',
+			'all_items'         => 'Усі категорії',
+			'edit_item'         => 'Редагувати категорію',
+			'update_item'       => 'Оновити категорію',
+			'add_new_item'      => 'Додати категорію',
+			'new_item_name'     => 'Нова категорія',
+			'menu_name'         => 'Категорія гравця',
 		),
-		'show_ui'       => true,
+		'show_ui'       => false,
+		// 'show_in_menu'	=> false,
 		'query_var'     => true,
-		//'rewrite'       => array( 'slug' => 'the_writer' ), // свой слаг в URL
+		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
 	));
 }
 
@@ -397,11 +416,12 @@ function my_navigation_template( $template, $class ){
 }
 
 //Вывод превью записей по заданным критериям + пагинация
-function fco_view_items($cat, $number_posts, $user_cat){
+function fco_view_items($cat, $number_posts, $user_cat, $current_post_ID = ''){
 	global $wp_query;
 
 	$args = array(
 		'posts_per_page' => $number_posts,
+		'post__not_in' => array($current_post_ID),
 		'order' => 'DESC',
 		'orderby' => 'date',
 		'cat' => $cat,
@@ -426,7 +446,7 @@ function fco_view_items($cat, $number_posts, $user_cat){
 
 			echo '<div class="w23 news-item">';
 			echo '	<div class="news-item-media-block">';
-			echo '		<div class="news-item-image <?=$postFormat;?>">';
+			echo '		<div class="news-item-image ' . $postFormat . '">';
 			echo '			<a href="' . get_the_permalink() . '" title="' . get_the_title() . '">';
 							if (get_post_format() === "video") {
 								$youtube_id = get_field('youtube_link');
