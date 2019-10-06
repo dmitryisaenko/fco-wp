@@ -48,6 +48,7 @@ if ( ! function_exists( 'fco_setup' ) ) :
 		add_image_size('fco-news-logo-300px', 274, 156, true);
 		add_image_size('fco-players-logo-big', 9999, 380);
 		add_image_size('fco-players-logo-small', 9999, 220);
+		// add_image_size( 'admin-list-thumb', 80, 80, false );
 
 		//Фильтр, который НЕ загружает указанные размеры изображений для указанных типов постов:
 		add_filter( 'intermediate_image_sizes_advanced', function( $sizes ){
@@ -291,7 +292,8 @@ function create_team_taxonomies(){
 			'menu_name'         => 'Вікова група',
 		),
 		'show_ui'       => true,
-		// 'show_in_menu'	=> false,
+		'show_admin_column' => true,
+		'show_in_menu'	=> false,
 		'query_var'     => true,
 		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
 	));
@@ -310,7 +312,8 @@ function create_team_taxonomies(){
 			'menu_name'         => 'Роль',
 		),
 		'show_ui'       => true,
-		// 'show_in_menu'	=> false,
+		'show_in_menu'	=> false,
+		'show_admin_column' => true,
 		'query_var'     => true,
 		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
 	));
@@ -329,16 +332,18 @@ function create_team_taxonomies(){
 			'menu_name'         => 'Категорія гравця',
 		),
 		'show_ui'       => false,
-		// 'show_in_menu'	=> false,
+		'show_in_menu'	=> false,
+		'show_admin_column' => false,
 		'query_var'     => true,
-		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
+		'rewrite'       => array( 'slug' => 'player_category' ), // свой слаг в URL
+		'show_in_rest' => true
 	));
 }
 
 add_theme_support( 'post-formats', array( 'video', 'gallery' ) );
 
 //Делаем возможность фильтровать записи с дополнительными фильтрами (таксономией):
-function filter_cars_by_taxonomies( $post_type, $which ) {
+function filter_by_taxonomies( $post_type, $which ) {
 
 	// Apply this only on a specific post type
 	if ( 'team' !== $post_type )
@@ -372,7 +377,57 @@ function filter_cars_by_taxonomies( $post_type, $which ) {
 	}
 
 }
-add_action( 'restrict_manage_posts', 'filter_cars_by_taxonomies' , 10, 2);
+add_action( 'restrict_manage_posts', 'filter_by_taxonomies' , 10, 2);
+
+
+//Выводим превьюшку участника в таблице со списком учасников клуба
+add_filter('manage_team_posts_columns', 'add_img_column');
+add_filter('manage_team_posts_custom_column', 'manage_img_column', 10, 2);
+
+function add_img_column($columns) {
+  $columns = array_slice($columns, 0, 1, true) + array("img_taxonomy" => "Фото", 'player_number' => 'Номер гравця') + array_slice($columns, 1, count($columns) - 1, true) + array("player_category" => "Категорія гравця");
+  return $columns;
+}
+
+function manage_img_column($column_name, $post_id) {
+ if( $column_name == 'img_thumbl' ) {
+	echo '<a href="' . get_edit_post_link() . '">';
+  echo get_the_post_thumbnail($post_id, 'admin-list-thumb');
+  echo '</a>';
+ }
+ return $column_name;
+}
+http://fco/wp-admin/post.php?post=453&action=edit
+
+//Доп. функция для вывода полей ACF:
+  function team_custom_column ( $column, $post_id ) {
+	switch ( $column ) {
+	  case 'player_number':
+	  echo get_post_meta ( $post_id, 'player_number', true );
+		break;
+	case 'player_category':
+		$term_id = get_post_meta ( $post_id, 'player_category', true );
+		$term = get_term( $term_id, 'player_category' );
+		echo '<a href="' . home_url() . '/wp-admin/edit.php?post_type=team&player_category=' . $term->slug .'">';
+		echo $term->name;
+		echo '</a>';
+		break;
+	case 'img_taxonomy':
+		$term_id = get_post_meta ( $post_id, 'member_photo_small', true );
+		$member_name = get_post_meta ( $post_id, 'member_name', true );
+		$member_familyname = get_post_meta ( $post_id, 'member_familyname', true );
+		$fio = $member_familyname . " " . $member_name;
+		echo '<a href="' . home_url() . '/wp-admin/post.php?post=' . $post_id . '&action=edit">';
+		echo wp_get_attachment_image($term_id, [64,64], '', ['title' => $fio]);
+		echo '</a>';
+		// print_r(get_term( $term_id ));
+		// echo '<pre>';
+		// print_r(get_post_meta( $post_id ));
+		// echo '</pre>';
+		break;
+	}
+  }
+  add_action ( 'manage_team_posts_custom_column', 'team_custom_column', 10, 2 );
 
 //Шорт-коды
 add_shortcode('fco_tags', 'fco_tags_function');
@@ -549,6 +604,9 @@ add_filter( 'wp_editor_settings', function( $settings ) {
 
     return $settings;
 } );
+
+
+
 
 
  ?>
