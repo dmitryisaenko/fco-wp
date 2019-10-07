@@ -3,9 +3,8 @@
         <div class="breadcrumb-wrapper">
             <div class="breadcrumb"><a href="<?=home_url(); ?>">Головна</a> / <span><span>Команда</span> / ФК "Олександрія" / Гравці</span></div>
         </div>
-
         <section class="main-container container">
-            <h1 class="page-header">ФК "Олександрія"</h1>
+            <h1 class="page-header"><?=get_post(get_post()->post_parent)->post_title;?></h1>
             <div class="team-header">
                 <ul>
                     <li><a href="#" class="active">Гравці</a></li>

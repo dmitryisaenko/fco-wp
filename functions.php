@@ -268,7 +268,7 @@ function register_post_types(){
 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
 		'hierarchical'        => true,
 		'supports'            => [ 'title', 'editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-		'taxonomies'          => ['team'],
+		'taxonomies'          => ['age-group,role,player_category'],
 		'has_archive'         => false,
 		// 'rewrite'             => array('slug' => 'team'),
 		'query_var'           => true,
@@ -333,7 +333,7 @@ function create_team_taxonomies(){
 		),
 		'show_ui'       => false,
 		'show_in_menu'	=> false,
-		'show_admin_column' => false,
+		// 'show_admin_column' => true,
 		'query_var'     => true,
 		'rewrite'       => array( 'slug' => 'player_category' ), // свой слаг в URL
 		'show_in_rest' => true
@@ -695,7 +695,7 @@ add_filter( 'wp_editor_settings', function( $settings ) {
 
 //Функция возвращает путь на основе страницы-родителе: main, u-21 или u-19 
 function get_preUrlLink(){
-	$parentName = get_post(get_post()->post_parent)->post_name;
+	$parentName = get_parentName();
 	return home_url() . '/team/' . $parentName;
 }
 
@@ -704,6 +704,17 @@ function get_parentName(){
 	return get_post(get_post()->post_parent)->post_name;
 }
 
+//Функция возвращает имя ФК - Александрия, U-19 или <U-21></U-21>
+function fco_get_fcName(){
+	$parentID = get_post(get_post()->post_parent);
+	print_r($parentID);
+	switch ( $parentID ) {
+		case 'player_number':
+			echo get_post_meta ( $post_id, 'player_number', true );
+			break;
 
+}
+
+}
 
  ?>

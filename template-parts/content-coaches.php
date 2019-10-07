@@ -5,7 +5,7 @@
         </div>
 
         <section class="main-container container">
-            <h1 class="page-header">ФК "Олександрія"</h1>
+        <h1 class="page-header"><?=get_post(get_post()->post_parent)->post_title;?></h1>
             <div class="team-header">
             
                 <ul>
