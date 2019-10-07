@@ -381,29 +381,18 @@ add_action( 'restrict_manage_posts', 'filter_by_taxonomies' , 10, 2);
 
 
 //Выводим превьюшку участника в таблице со списком учасников клуба
-add_filter('manage_team_posts_columns', 'add_img_column');
-add_filter('manage_team_posts_custom_column', 'manage_img_column', 10, 2);
-
 function add_img_column($columns) {
-  $columns = array_slice($columns, 0, 1, true) + array("img_taxonomy" => "Фото", 'player_number' => 'Номер гравця') + array_slice($columns, 1, count($columns) - 1, true) + array("player_category" => "Категорія гравця");
-  return $columns;
+	$columns = array_slice($columns, 0, 1, true) + array("img_attached" => "Фото", 'player_number' => 'Номер гравця') + array_slice($columns, 1, count($columns) - 1, true) + array("player_category" => "Категорія гравця");
+	return $columns;
 }
+add_filter('manage_team_posts_columns', 'add_img_column');
 
-function manage_img_column($column_name, $post_id) {
- if( $column_name == 'img_thumbl' ) {
-	echo '<a href="' . get_edit_post_link() . '">';
-  echo get_the_post_thumbnail($post_id, 'admin-list-thumb');
-  echo '</a>';
- }
- return $column_name;
-}
-http://fco/wp-admin/post.php?post=453&action=edit
 
 //Доп. функция для вывода полей ACF:
-  function team_custom_column ( $column, $post_id ) {
+function team_custom_column ( $column, $post_id ) {
 	switch ( $column ) {
-	  case 'player_number':
-	  echo get_post_meta ( $post_id, 'player_number', true );
+		case 'player_number':
+		echo get_post_meta ( $post_id, 'player_number', true );
 		break;
 	case 'player_category':
 		$term_id = get_post_meta ( $post_id, 'player_category', true );
@@ -412,7 +401,7 @@ http://fco/wp-admin/post.php?post=453&action=edit
 		echo $term->name;
 		echo '</a>';
 		break;
-	case 'img_taxonomy':
+	case 'img_attached':
 		$term_id = get_post_meta ( $post_id, 'member_photo_small', true );
 		$member_name = get_post_meta ( $post_id, 'member_name', true );
 		$member_familyname = get_post_meta ( $post_id, 'member_familyname', true );
@@ -420,14 +409,16 @@ http://fco/wp-admin/post.php?post=453&action=edit
 		echo '<a href="' . home_url() . '/wp-admin/post.php?post=' . $post_id . '&action=edit">';
 		echo wp_get_attachment_image($term_id, [64,64], '', ['title' => $fio]);
 		echo '</a>';
-		// print_r(get_term( $term_id ));
-		// echo '<pre>';
-		// print_r(get_post_meta( $post_id ));
-		// echo '</pre>';
 		break;
+	case 'img_thumbnail': //Если нужно вывести именно картинку превью, а не присоедененную картинку
+		echo '<a href="' . get_edit_post_link() . '">';
+		echo get_the_post_thumbnail($post_id, 'admin-list-thumb');
+		echo '</a>';
+		break;
+
 	}
-  }
-  add_action ( 'manage_team_posts_custom_column', 'team_custom_column', 10, 2 );
+}
+add_action ( 'manage_team_posts_custom_column', 'team_custom_column', 10, 2 );
 
 //Шорт-коды
 add_shortcode('fco_tags', 'fco_tags_function');
@@ -510,6 +501,103 @@ function my_navigation_template( $template, $class ){
 	</nav>    
 	';
 }
+
+//Вывод записей по указанный таксономиям и формирование кода для отображения на странице с участниками команды
+function fco_member_items($age_group, $role, $player_category = '', $block_width = '23'){
+	if ($role === 'players'){
+		$args = [
+			'post_type' => 'team',
+			'tax_query' => [
+				'relation' => 'AND',
+				[
+					'taxonomy' => 'age-group',
+					'field'    => 'slug',
+					'terms'    => $age_group,
+				],
+				[
+					'taxonomy' => 'role',
+					'field'    => 'slug',
+					'terms'    => $role,
+				],
+				[
+					'taxonomy' => 'player_category',
+					'field'    => 'slug',
+					'terms'    => $player_category,
+				]
+			]
+		];
+	}
+	else {
+		$args = [
+			'post_type' => 'team',
+			'tax_query' => [
+				'relation' => 'AND',
+				[
+					'taxonomy' => 'age-group',
+					'field'    => 'slug',
+					'terms'    => $age_group,
+				],
+				[
+					'taxonomy' => 'role',
+					'field'    => 'slug',
+					'terms'    => $role,
+				]
+			]
+		];
+	}
+	$query = new WP_Query( $args );
+	if ( $query->have_posts() ){
+		while ( $query->have_posts() ) {
+			$query->the_post();
+				if ($role === 'players'){
+					echo '<div class="w' . $block_width .' team-block-item">';
+					echo '            <a href="' . get_the_permalink() . '">';
+					echo '                <div class="team-block-item-img">';
+					echo '                    <img class="img-responsive" src="' . get_field('member_photo_small') . '" width="260" height="220" alt="">';
+					echo '                </div>';
+					echo '                <div class="team-block-item-content">';
+					echo '                    <div class="team-block-item-content-fio-wrapper">';
+					echo '                        <div class="team-block-item-content-name">';
+					echo                             get_field('member_name');
+					echo '                        </div>';
+					echo '                        <div class="team-block-item-content-familyname">';
+					echo                             get_field('member_familyname');
+					echo '                        </div>';
+					echo '                    </div>';
+					echo '                    <div class="team-block-item-content-number">';
+					echo                             get_field('player_number');
+					
+					echo '                    </div>';
+					echo '                </div>';
+					echo '            </a>';
+					echo '        </div>';
+				}
+				else {
+					echo '<div class="w' . $block_width .' team-block-item">';
+					echo '            <a href="' . get_the_permalink() . '">';
+					echo '                <div class="team-block-item-img">';
+					echo '                    <img class="img-responsive" src="' . get_field('member_photo_small') . '" width="260" height="220" alt="">';
+					echo '                </div>';
+					echo '					<div class="team-block-item-content-nonplayers">';
+					echo '				<div class="team-block-item-content-nonplayers-firstname">';
+					echo                     get_field('member_name');
+					echo '				</div>';
+					echo '				<div class="team-block-item-content-nonplayers-familyname">';
+					echo                             get_field('member_familyname');
+					echo '				</div>';
+
+					echo '				<div class="team-block-item-content-nonplayers-title">';
+					echo                             get_field('member_role');
+					echo '				</div>';
+					echo '			</div>';
+					echo '            </a>';
+					echo '        </div>';
+				}
+		}
+	}
+	wp_reset_query(); 
+	wp_reset_postdata();
+} 
 
 //Вывод превью записей по заданным критериям + пагинация
 function fco_view_items($cat, $number_posts, $user_cat, $current_post_ID = ''){
@@ -605,7 +693,16 @@ add_filter( 'wp_editor_settings', function( $settings ) {
     return $settings;
 } );
 
+//Функция возвращает путь на основе страницы-родителе: main, u-21 или u-19 
+function get_preUrlLink(){
+	$parentName = get_post(get_post()->post_parent)->post_name;
+	return home_url() . '/team/' . $parentName;
+}
 
+//Функция возвращает имя страницы-родителе: main, u-21 или u-19 
+function get_parentName(){
+	return get_post(get_post()->post_parent)->post_name;
+}
 
 
 

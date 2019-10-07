@@ -1,7 +1,7 @@
 <!-- Основное содержимое страниц -->
 <main>
 	<div class="breadcrumb-wrapper">
-        <div class="breadcrumb"><a href="/">Головна</a> / <span><span>Медіа</span> / Відео галерея / Відео</span></div>
+        <div class="breadcrumb"><a href="<?=home_url() ?>">Головна</a> / <span><span>Медіа</span> / Відео галерея / Відео</span></div>
 	</div>
 	<section class="main-container container">
 	<?php while ( have_posts() ) : 	the_post(); ?>

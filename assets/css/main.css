@@ -2124,7 +2124,7 @@ table.abridged-table__responsible td:nth-child(9) {
   top: 0;
   width: 165px;
   height: 111px;
-  background: url(/img/kontaksprite.png);
+  background: url(../img/kontaksprite.png);
 }
 .contact-title-phone::before {
   background-position: -172px 0;
@@ -2309,7 +2309,7 @@ h1.page-header span {
   margin-right: 1%;
 }
 .team-block-item-img {
-  background: url(/img/bgitems.png) no-repeat;
+  background: url(../img/bgitems.png) no-repeat;
   background-size: cover;
   text-align: center;
   -webkit-box-sizing: border-box;
@@ -2351,7 +2351,7 @@ h1.page-header span {
   height: 120px;
   right: 0;
   top: 0;
-  background: url(/img/pointers2.png) no-repeat;
+  background: url(../img/pointers2.png) no-repeat;
   z-index: -1;
 }
 .team-block-item-content-nonplayers-familyname {
@@ -2393,7 +2393,7 @@ h1.page-header span {
   top: 0;
   width: 74px;
   height: 74px;
-  background: url(/img/pointers.png) no-repeat;
+  background: url(../img/pointers.png) no-repeat;
   background-size: 100%;
   z-index: -1;
 }
@@ -2410,7 +2410,7 @@ h1.page-header span {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: url(/img/openbg.jpg);
+  background: url(../img/openbg.jpg);
   background-repeat-y: no-repeat;
 }
 .team-single-header-content {
@@ -2493,7 +2493,7 @@ h1.page-header span {
   width: 44px;
   height: 44px;
   font-size: 0;
-  background: url(/img/pointslide.png);
+  background: url(../img/pointslide.png);
   background-size: 100% 100%;
 }
 .team-central-content {
@@ -2598,7 +2598,7 @@ h1.page-header span {
   content: "";
   left: 50%;
   top: 50%;
-  background: url(/img/sprite.png);
+  background: url(../img/sprite.png);
 }
 .team-single-subheader-middle div:nth-child(1)::before {
   width: 18px;
@@ -2698,7 +2698,7 @@ h1.page-header span {
   top: -18px;
   left: 50%;
   margin-left: -17.5px;
-  background: url(/img/infopoint.png);
+  background: url(../img/infopoint.png);
 }
 .team-single-subheader-middle #fall-goals::before {
   width: 22px;
@@ -2747,7 +2747,7 @@ h1.page-header span {
   right: 0;
   width: 0;
   height: 100%;
-  background: url(/img/spritesmall.png);
+  background: url(../img/spritesmall.png);
   background-position: 0px 0px;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
@@ -3155,7 +3155,7 @@ ul.horizontal-tabs-list li.active {
   height: 59px;
 }
 .scorers-table td.scorer_img {
-  background: url(/img/bgitemsmini.png);
+  background: url(../img/bgitemsmini.png);
   background-size: cover;
   padding-bottom: 0;
 }

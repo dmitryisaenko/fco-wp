@@ -54,7 +54,7 @@
 </div>
 <div class="header-top-line">
 	<div class="main-logo">
-		<a href="<? home_url() ?>">
+		<a href="<?=home_url(); ?>">
 			<img src="<?=get_template_directory_uri(); ?>/assets/img/logo.png" alt="" />
 			<div class="logo-content">
 				<h4>ОФІЦІЙНИЙ САЙТ</h4>

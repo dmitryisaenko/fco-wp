@@ -2,7 +2,7 @@
 <!-- Основное содержимое страниц -->
 <main>
     <div class="breadcrumb-wrapper">
-        <div class="breadcrumb"><a href="/">Головна</a> / <span><span>Медіа</span> / Відео галерея</span></div>
+        <div class="breadcrumb"><a href="<?=home_url() ?>">Головна</a> / <span><span>Медіа</span> / Відео галерея</span></div>
     </div>
     <section class="news-block" id="single-news-page">
         <h2 class="block-title"><span>Відео</span> галерея</h2>
