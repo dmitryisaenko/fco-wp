@@ -1,7 +1,8 @@
+
 <!-- Основное содержимое страниц -->
 <main>
         <div class="breadcrumb-wrapper">
-            <div class="breadcrumb"><a href="<?=home_url(); ?>">Головна</a> / <span><span>Команда</span> / ФК "Олександрія" / Гравці</span></div>
+            <div class="breadcrumb"><a href="<?=home_url(); ?>">Головна</a> / <span><span>Команда</span> / <?=get_post(get_post()->post_parent)->post_title;?> / Гравці</span></div>
         </div>
         <section class="main-container container">
             <h1 class="page-header"><?=get_post(get_post()->post_parent)->post_title;?></h1>

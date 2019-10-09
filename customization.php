@@ -517,6 +517,37 @@ function fco_customize_register( $wp_customize ) {
             );
         }
     }
+
+    //Поточний сезон:
+    {
+        $wp_customize->add_section( 'fco_ex_settings' , array(
+            'title'      => 'Додаткові налаштування',
+            'panel' => 'main_panel',
+            ) 
+        );
+        
+        
+
+        $wp_customize->add_setting(
+            'fco_ex_settings_seson',
+            array(
+                'transport'         => 'refresh',
+            ) 
+        );
+
+        $wp_customize->add_control( 
+            new WP_Customize_Control( 
+                $wp_customize, 
+                'fco_ex_settings_seson', 
+                array(
+                    'label'      => 'Дата поточного сезону',
+                    'section'    => 'fco_ex_settings',
+                    'settings'   => 'fco_ex_settings_seson',
+                    'type' => 'text',
+                )
+            )
+        );
+    }
  }
  
  add_action( 'customize_register', 'fco_customize_register' );

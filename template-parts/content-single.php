@@ -7,7 +7,7 @@
 	<?php while ( have_posts() ) : 	the_post(); ?>
 			<div class="news-single-header">
 				<div class="news-single-header-logo">
-				<?php the_post_thumbnail(); ?>
+				<?php the_post_thumbnail('', ['class' => "img-responsive"]); ?>
 				</div>
 				<div class="news-single-subheader">
 					<div class="news-single-subheader-title">

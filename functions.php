@@ -48,6 +48,8 @@ if ( ! function_exists( 'fco_setup' ) ) :
 		add_image_size('fco-news-logo-300px', 274, 156, true);
 		add_image_size('fco-players-logo-big', 9999, 380);
 		add_image_size('fco-players-logo-small', 9999, 220);
+		add_image_size('fco-club-logo', 150, 150);
+		add_image_size('fco-club-logo-small', 40, 40);
 		// add_image_size( 'admin-list-thumb', 80, 80, false );
 
 		//Фильтр, который НЕ загружает указанные размеры изображений для указанных типов постов:
@@ -55,10 +57,29 @@ if ( ! function_exists( 'fco_setup' ) ) :
 			if( isset( $_REQUEST['post_id'] ) && 'post' == get_post_type($_REQUEST['post_id'] ) ) {
 				unset( $sizes['fco-players-logo-big'] );
 				unset( $sizes['fco-players-logo-small'] );
+				unset( $sizes['fco-club-logo'] );
+				unset( $sizes['fco-club-logo-small'] );
 			}
 			if( isset( $_REQUEST['post_id'] ) && 'team' == get_post_type($_REQUEST['post_id'] ) ) {
 				unset( $sizes['fco-news-logo-1140px'] );
 				unset( $sizes['fco-news-logo-300px'] );
+				unset( $sizes['fco-club-logo'] );
+				unset( $sizes['fco-club-logo-small'] );
+				unset( $sizes['medium'] );
+				unset( $sizes['large'] );
+				unset( $sizes['thumb'] );
+				unset( $sizes['post-thumbnail'] );
+				
+			}
+			if( isset( $_REQUEST['post_id'] ) && 'team' == get_post_type($_REQUEST['post_id'] ) ) {
+				unset( $sizes['fco-players-logo-big'] );
+				unset( $sizes['fco-players-logo-small'] );
+				unset( $sizes['fco-news-logo-1140px'] );
+				unset( $sizes['fco-news-logo-300px'] );
+				unset( $sizes['medium'] );
+				unset( $sizes['large'] );
+				unset( $sizes['thumb'] );
+				unset( $sizes['post-thumbnail'] );
 			}
 			return $sizes;
 		 
@@ -146,7 +167,7 @@ add_action( 'after_setup_theme', 'fco_setup' );
  */
 function fco_widgets_init() {
 	register_sidebar( array(
-		'name'          => 'Sidebar',
+		'name'          => 'Sidebar основний',
 		'id'            => 'sidebar-1',
 		'description'   => '',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
@@ -157,6 +178,15 @@ function fco_widgets_init() {
 	register_sidebar( array(
 		'name'          => 'Sidebar для новин',
 		'id'            => 'sidebar-news',
+		'description'   => '',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="widget-title">',
+		'after_title'   => '</div>',
+	) );
+	register_sidebar( array(
+		'name'          => 'Sidebar для учасників',
+		'id'            => 'sidebar-team',
 		'description'   => '',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
@@ -249,7 +279,7 @@ function register_post_types(){
 			'not_found'          => 'Не знайдено', // если в результате поиска ничего не было найдено
 			'not_found_in_trash' => 'Не знайдено в корзині', // если не было найдено в корзине
 			'parent_item_colon'  => '', // для родителей (у древовидных типов)
-			'menu_name'          => 'Команда', // название меню
+			'menu_name'          => 'ФК Олександрія', // название меню
 		),
 		'description'         => '',
 		'public'              => true,
@@ -262,13 +292,91 @@ function register_post_types(){
 		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
 		'rest_base'           => null, // $post_type. C WP 4.7
 		'menu_position'       => null,
-		'menu_icon'           => 'dashicons-admin-users', 
+		'menu_icon'           => get_template_directory_uri().'/assets/img/fco-logo-micro.png', 
 		//'capability_type'   => 'post',
 		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
 		'hierarchical'        => true,
 		'supports'            => [ 'title', 'editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
 		'taxonomies'          => ['age-group,role,player_category'],
+		'has_archive'         => false,
+		// 'rewrite'             => array('slug' => 'team'),
+		'query_var'           => true,
+	) );
+
+	register_post_type('match', array(
+		'label'  => null,
+		'labels' => array(
+			'name'               => 'Календар турнірів', // основное название для типа записи
+			'singular_name'      => 'Турнір', // название для одной записи этого типа
+			'add_new'            => 'Додати турнір', // для добавления новой записи
+			'add_new_item'       => 'Додати турнір', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редагувати турнір', // для редактирования типа записи
+			'new_item'           => 'Новий турнір', // текст новой записи
+			'view_item'          => 'Турніри', // для просмотра записи этого типа.
+			'search_items'       => 'Шукати турнір', // для поиска по этим типам записи
+			'not_found'          => 'Не знайдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не знайдено в корзині', // если не было найдено в корзине
+			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+			'menu_name'          => 'Календар турнірів', // название меню
+		),
+		'description'         => '',
+		'public'              => true,
+		// 'publicly_queryable'  => null, // зависит от public
+		// 'exclude_from_search' => null, // зависит от public
+		// 'show_ui'             => null, // зависит от public
+		// 'show_in_nav_menus'   => null, // зависит от public
+		'show_in_menu'        => null, // показывать ли в меню адмнки
+		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
+		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
+		'rest_base'           => null, // $post_type. C WP 4.7
+		'menu_position'       => null,
+		'menu_icon'           => 'dashicons-sos', 
+		//'capability_type'   => 'post',
+		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+		'hierarchical'        => true,
+		'supports'            => [ 'title', 'editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => ['season,tournament,stadium,referee'],
+		'has_archive'         => false,
+		// 'rewrite'             => array('slug' => 'team'),
+		'query_var'           => true,
+	) );
+
+	register_post_type('clubs', array(
+		'label'  => null,
+		'labels' => array(
+			'name'               => 'Футбольні команди', // основное название для типа записи
+			'singular_name'      => 'Футбольна команда', // название для одной записи этого типа
+			'add_new'            => 'Додати футбольну команду', // для добавления новой записи
+			'add_new_item'       => 'Додати футбольну команду', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редагувати футбольну команду', // для редактирования типа записи
+			'new_item'           => 'Новиа футбольна команда', // текст новой записи
+			'view_item'          => 'Футбольні команди', // для просмотра записи этого типа.
+			'search_items'       => 'Шукати футбольну команду', // для поиска по этим типам записи
+			'not_found'          => 'Не знайдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не знайдено в корзині', // если не было найдено в корзине
+			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+			'menu_name'          => 'Футбольні команди', // название меню
+		),
+		'description'         => '',
+		'public'              => true,
+		// 'publicly_queryable'  => null, // зависит от public
+		'exclude_from_search' => true, // зависит от public
+		// 'show_ui'             => null, // зависит от public
+		// 'show_in_nav_menus'   => null, // зависит от public
+		'show_in_menu'        => null, // показывать ли в меню адмнки
+		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
+		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
+		'rest_base'           => null, // $post_type. C WP 4.7
+		'menu_position'       => null,
+		'menu_icon'           => 'dashicons-id-alt', 
+		//'capability_type'   => 'post',
+		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+		'hierarchical'        => true,
+		'supports'            => ['title'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => ['season,tournament,stadium,referee'],
 		'has_archive'         => false,
 		// 'rewrite'             => array('slug' => 'team'),
 		'query_var'           => true,
@@ -321,15 +429,15 @@ function create_team_taxonomies(){
 	register_taxonomy('player_category', array('team'), array(
 		'hierarchical'  => true,
 		'labels'        => array(
-			'name'              => 'Категорія гравця',
-			'singular_name'     => 'Категорія гравця',
-			'search_items'      => 'Пошук категорії',
-			'all_items'         => 'Усі категорії',
-			'edit_item'         => 'Редагувати категорію',
-			'update_item'       => 'Оновити категорію',
-			'add_new_item'      => 'Додати категорію',
-			'new_item_name'     => 'Нова категорія',
-			'menu_name'         => 'Категорія гравця',
+			'name'              => 'Амплуа гравця',
+			'singular_name'     => 'Амплуа гравця',
+			'search_items'      => 'Пошук амплуа',
+			'all_items'         => 'Усі амплуа',
+			'edit_item'         => 'Редагувати амплуа',
+			'update_item'       => 'Оновити амплуа',
+			'add_new_item'      => 'Додати амплуа',
+			'new_item_name'     => 'Нове амплуа',
+			'menu_name'         => 'Амплуа гравця',
 		),
 		'show_ui'       => false,
 		'show_in_menu'	=> false,
@@ -338,11 +446,88 @@ function create_team_taxonomies(){
 		'rewrite'       => array( 'slug' => 'player_category' ), // свой слаг в URL
 		'show_in_rest' => true
 	));
+	register_taxonomy('season', array('match'), array(
+		'hierarchical'  => true,
+		'labels'        => array(
+			'name'              => 'Сезон',
+			'singular_name'     => 'Сезон',
+			'search_items'      => 'Пошук сезону',
+			'all_items'         => 'Усі сезони',
+			'edit_item'         => 'Редагувати сезон',
+			'update_item'       => 'Оновити сезон',
+			'add_new_item'      => 'Додати сезон',
+			'new_item_name'     => 'Новий сезон',
+			'menu_name'         => 'Сезон',
+		),
+		'show_ui'       => true,
+		'show_admin_column' => true,
+		'show_in_menu'	=> true,
+		'query_var'     => true,
+		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
+	));
+	register_taxonomy('tournament', array('match'), array(
+		'hierarchical'  => true,
+		'labels'        => array(
+			'name'              => 'Турнір',
+			'singular_name'     => 'Турнір',
+			'search_items'      => 'Пошук турніру',
+			'all_items'         => 'Усі турніри',
+			'edit_item'         => 'Редагувати турнір',
+			'update_item'       => 'Оновити турнір',
+			'add_new_item'      => 'Додати турнір',
+			'new_item_name'     => 'Новий турнір',
+			'menu_name'         => 'Турнір',
+		),
+		'show_ui'       => true,
+		'show_admin_column' => true,
+		'show_in_menu'	=> true,
+		'query_var'     => true,
+		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
+	));
+	register_taxonomy('stadium', array('match'), array(
+		'hierarchical'  => true,
+		'labels'        => array(
+			'name'              => 'Стадіон',
+			'singular_name'     => 'Стадіон',
+			'search_items'      => 'Пошук стадіону',
+			'all_items'         => 'Усі стадіони',
+			'edit_item'         => 'Редагувати стадіон',
+			'update_item'       => 'Оновити стадіон',
+			'add_new_item'      => 'Додати стадіон',
+			'new_item_name'     => 'Новий стадіон',
+			'menu_name'         => 'Стадіони',
+		),
+		'show_ui'       => true,
+		'show_admin_column' => true,
+		'show_in_menu'	=> true,
+		'query_var'     => true,
+		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
+	));
+	register_taxonomy('referee', array('match'), array(
+		'hierarchical'  => true,
+		'labels'        => array(
+			'name'              => 'Рефері',
+			'singular_name'     => 'Рефері',
+			'search_items'      => 'Пошук рефері',
+			'all_items'         => 'Усі рефері',
+			'edit_item'         => 'Редагувати рефері',
+			'update_item'       => 'Оновити рефері',
+			'add_new_item'      => 'Додати рефері',
+			'new_item_name'     => 'Новий рефері',
+			'menu_name'         => 'Рефері',
+		),
+		'show_ui'       => true,
+		'show_admin_column' => false,
+		'show_in_menu'	=> true,
+		'query_var'     => true,
+		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
+	));
 }
 
 add_theme_support( 'post-formats', array( 'video', 'gallery' ) );
 
 //Делаем возможность фильтровать записи с дополнительными фильтрами (таксономией):
+add_action( 'restrict_manage_posts', 'filter_by_taxonomies' , 10, 2);
 function filter_by_taxonomies( $post_type, $which ) {
 
 	// Apply this only on a specific post type
@@ -377,18 +562,16 @@ function filter_by_taxonomies( $post_type, $which ) {
 	}
 
 }
-add_action( 'restrict_manage_posts', 'filter_by_taxonomies' , 10, 2);
 
 
 //Выводим превьюшку участника в таблице со списком учасников клуба
+add_filter('manage_team_posts_columns', 'add_img_column');
 function add_img_column($columns) {
-	$columns = array_slice($columns, 0, 1, true) + array("img_attached" => "Фото", 'player_number' => 'Номер гравця') + array_slice($columns, 1, count($columns) - 1, true) + array("player_category" => "Категорія гравця");
+	$columns = array_slice($columns, 0, 1, true) + array("img_attached" => "Фото", 'player_number' => 'Номер гравця') + array_slice($columns, 1, count($columns) - 1, true) + array("player_category" => "Амплуа гравця");
 	return $columns;
 }
-add_filter('manage_team_posts_columns', 'add_img_column');
-
-
 //Доп. функция для вывода полей ACF:
+add_action ( 'manage_team_posts_custom_column', 'team_custom_column', 10, 2 );
 function team_custom_column ( $column, $post_id ) {
 	switch ( $column ) {
 		case 'player_number':
@@ -418,7 +601,60 @@ function team_custom_column ( $column, $post_id ) {
 
 	}
 }
-add_action ( 'manage_team_posts_custom_column', 'team_custom_column', 10, 2 );
+
+
+//Выводим превьюшку поста в таблице со списком постов
+add_filter('manage_posts_columns', 'add_img_post_column');
+function add_img_post_column($columns) {
+	$columns = array_slice($columns, 0, 1, true) + array("img_attached" => "Превью") + array_slice($columns, 1, count($columns) - 1, true);
+	return $columns;
+}
+//Доп. функция для вывода превью поста:
+add_action ( 'manage_posts_custom_column', 'post_custom_column', 10, 2 );
+function post_custom_column ( $column, $post_id ) {
+	if ( $column === 'img_attached' ) {
+		echo '<a href="' . get_edit_post_link() . '">';
+		echo get_the_post_thumbnail($post_id, [64,64]);
+		echo '</a>';
+	}
+}
+
+//Выводим превьюшку участника в таблице со списком слайдеров
+add_filter('manage_wxas_slider_posts_columns', 'add_wxas_slider_column');
+function add_wxas_slider_column($columns) {
+	$columns = array_slice($columns, 0, 2, true) + array("slider_id" => "Слайдер") + array_slice($columns, 1, count($columns) - 1, true);
+	return $columns;
+}
+//Доп. функция для вывода значений id слайдера:
+add_action ( 'manage_wxas_slider_posts_custom_column', 'wxas_slider_custom_column', 10, 2 );
+function wxas_slider_custom_column ( $column, $post_id ) {
+	switch ( $column ) {
+		case 'slider_id':
+			echo '[wxas id="' . get_the_ID( ) . '"]';
+			break;
+	
+	
+
+	}
+}
+
+//Выводим превьюшку в таблице со списком клубов
+add_filter('manage_clubs_posts_columns', 'add_img_club_column');
+function add_img_club_column($columns) {
+	$columns = array_slice($columns, 0, 1, true) + array("img_attached" => "Лого") + array_slice($columns, 1, count($columns) - 1, true);
+	return $columns;
+}
+
+//Доп. функция для вывода превью лого клуба:
+add_action ( 'manage_clubs_posts_custom_column', 'logo_custom_column', 10, 2 );
+function logo_custom_column ( $column, $post_id ) {
+	if ( $column === 'img_attached' ) {
+		$term_id = get_post_meta ( $post_id, 'fclub_logo', true );
+		echo '<a href="' . get_edit_post_link() . '">';
+		echo wp_get_attachment_image($term_id, [64,64], '');
+		echo '</a>';
+	}
+}
 
 //Шорт-коды
 add_shortcode('fco_tags', 'fco_tags_function');
@@ -502,7 +738,7 @@ function my_navigation_template( $template, $class ){
 	';
 }
 
-//Вывод записей по указанный таксономиям и формирование кода для отображения на странице с участниками команды
+//Вывод записей по указанным таксономиям и формирование кода для отображения на странице с участниками команды
 function fco_member_items($age_group, $role, $player_category = '', $block_width = '23'){
 	if ($role === 'players'){
 		$args = [
@@ -630,6 +866,7 @@ function fco_view_items($cat, $number_posts, $user_cat, $current_post_ID = ''){
 
 			echo '<div class="w23 news-item">';
 			echo '	<div class="news-item-media-block">';
+			if (get_field('google_photo_url')) echo '<div class="has-google-url" title="Присутнє посилання на Google-Фото"></div>';
 			echo '		<div class="news-item-image ' . $postFormat . '">';
 			echo '			<a href="' . get_the_permalink() . '" title="' . get_the_title() . '">';
 							if (get_post_format() === "video") {
@@ -638,7 +875,8 @@ function fco_view_items($cat, $number_posts, $user_cat, $current_post_ID = ''){
 							}
 							else {
 								if (has_post_thumbnail()){
-									the_post_thumbnail( 'fco-news-logo-300px' );
+									echo '<img src="' .get_the_post_thumbnail_url(get_the_ID(), 'fco-news-logo-300px' ). '" alt="' .get_the_title(). '">';
+									
 								}
 								else {
 									echo "<img src='". get_template_directory_uri() . "/assets/img/no-photo-available.jpg' >";
@@ -693,13 +931,13 @@ add_filter( 'wp_editor_settings', function( $settings ) {
     return $settings;
 } );
 
-//Функция возвращает путь на основе страницы-родителе: main, u-21 или u-19 
+//Функция возвращает путь на основе страницы-родителя: main, u-21 или u-19 
 function get_preUrlLink(){
 	$parentName = get_parentName();
 	return home_url() . '/team/' . $parentName;
 }
 
-//Функция возвращает имя страницы-родителе: main, u-21 или u-19 
+//Функция возвращает имя страницы-родителя: main, u-21 или u-19 
 function get_parentName(){
 	return get_post(get_post()->post_parent)->post_name;
 }
@@ -715,6 +953,27 @@ function fco_get_fcName(){
 
 }
 
+
+
+}
+
+//Делаем приоритет страниц выше, чему у тегов (нужно, когда тег и Custom-page имеют одинаковое имя)
+add_action( 'init', 'wpse16902_init' );
+function wpse16902_init() {
+    $GLOBALS['wp_rewrite']->use_verbose_page_rules = true;
+}
+
+add_filter( 'page_rewrite_rules', 'wpse16902_collect_page_rewrite_rules' );
+function wpse16902_collect_page_rewrite_rules( $page_rewrite_rules )
+{
+    $GLOBALS['wpse16902_page_rewrite_rules'] = $page_rewrite_rules;
+    return array();
+}
+
+add_filter( 'rewrite_rules_array', 'wspe16902_prepend_page_rewrite_rules' );
+function wspe16902_prepend_page_rewrite_rules( $rewrite_rules )
+{
+    return $GLOBALS['wpse16902_page_rewrite_rules'] + $rewrite_rules;
 }
 
  ?>

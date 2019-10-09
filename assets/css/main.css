@@ -46,7 +46,8 @@ nav {
 }
 .img-responsive {
   display: block;
-  max-width: 100%;
+  width: 100%;
+  /* max-width: 100%; */
   height: auto;
 }
 .w25 {
@@ -1427,6 +1428,36 @@ table.abridged-table__responsible td:nth-child(9) {
   position: relative;
   margin-bottom: 30px;
 }
+.google_photo .google-photo-url{
+  position: absolute;
+  width: 25%;
+  height: 30%;
+  top: 0;
+  right: 0;
+  background: url(../img/google_photos.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 1px 1px 3px grey;
+  opacity: 0.5;
+}
+.google_photo .google_photo_url:hover{
+  opacity: 0.9;
+}
+.has-google-url{
+  position: absolute;
+  width: 12%;
+  height: 22%;
+  top: 3%;
+  right: 3%;
+  background: url(../img/google_photos.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  opacity: 0.9;
+  border-radius: 3px;
+}
 .news-single-header-logo img {
   height: auto;
   display: block;
@@ -1567,6 +1598,7 @@ table.abridged-table__responsible td:nth-child(9) {
   height: 28px;
 }
 .central-content-news-single img {
+  max-width: 100%;
   height: auto;
 }
 .widget-title-tags::before {
@@ -1967,7 +1999,7 @@ table.abridged-table__responsible td:nth-child(9) {
   z-index: 1;
   width: 40px;
   height: 35px;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
 }
 .slick-prev {
   left: 20px;
@@ -2415,9 +2447,9 @@ h1.page-header span {
 }
 .team-single-header-content {
   padding-left: 60px;
-  -ms-flex-preferred-size: 56%;
-      flex-basis: 56%;
+  flex-basis: 56%;
   line-height: 1.4;
+  position: relative;
 }
 .team-single-header-content p {
   margin: 0;
@@ -2447,6 +2479,30 @@ h1.page-header span {
   font-size: 18px;
   color: #27282C;
 }
+.team-single-header-content .weight_wrapper{
+  position: relative;
+  padding: 5px 0;
+    margin: 5px 0;
+}
+.team-single-header-content p.weight::before{
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 50px;
+  top: 0;
+  left: 0;
+  background: #27282C;
+}
+.team-single-header-content p.weight::after{
+  position: absolute;
+    content: "";
+    height: 1px;
+    width: 50px;
+    bottom: 0;
+    left: 0;
+    background: #27282C;
+}
+
 .team-single-header-content p.civil-title {
   font-size: 18px;
   margin-top: 15px;
@@ -2468,7 +2524,7 @@ h1.page-header span {
   height: 380px;
   display: inline-block;
   margin-top: 20px;
-  margin-bottom: -4px;
+  margin-bottom: -3px;
 }
 .team-single-header-nav_perv {
   position: absolute;

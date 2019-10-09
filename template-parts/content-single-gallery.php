@@ -6,8 +6,13 @@
 	<section class="main-container container">
 	<?php while ( have_posts() ) : 	the_post(); ?>
 			<div class="news-single-header">
+				<div class="google_photo">
+					<? if (get_field('google_photo_url')) echo '<a class="google-photo-url" href="' . get_field('google_photo_url') .'" target="_blank" title="Посилання на Google-Фото"></a>';
+					?>	
+					
+				</div>
 				<div class="news-single-header-logo">
-				    <?php the_post_thumbnail(); ?>
+					<? echo '<img src="' .get_the_post_thumbnail_url(get_the_ID(), 'fco-news-logo-1140px' ). '" alt="' .get_the_title(). '" class="img-responsive">'; ?>
 				</div>
 				<div class="news-single-subheader news-single-subheader-media-item">
 					<div class="news-single-subheader-title news-single-subheader-title-media-item">
@@ -52,8 +57,8 @@
 		</section>
 	</section>
 	<div class="ads-block-top">
-	<a href="<?=get_theme_mod('fco_load_url_shop');?>" taret="_blank">
-		<img src="<?=get_theme_mod('fco_load_baner_shop');?>" alt="">
-	</a>
-</div>
+		<a href="<?=get_theme_mod('fco_load_url_shop');?>" taret="_blank">
+			<img src="<?=get_theme_mod('fco_load_baner_shop');?>" alt="">
+		</a>
+	</div>
 </main>

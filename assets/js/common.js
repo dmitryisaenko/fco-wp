@@ -25,7 +25,7 @@ $(document).ready(function(){
 		// $(this).css('display', 'inline-block');;
     });
 
-    //Скрытые/отображение списка игроков в виджете на странице Команда
+    //Сокрытие/отображение списка игроков в виджете на странице Команда
     $playersList = $('h3.widget-body-players-list-title');
     $playersList.click(function() {
         $playersList.not(this).next().hide(300);
@@ -34,9 +34,9 @@ $(document).ready(function(){
         $(this).toggleClass('special');
     });
 
-    //Отображение подсказки при клике по-достижениям игрока
+    //Отображение подсказки при клике по достижениям игрока
     $playerItem = $('.team-single-subheader-middle div');
-    $playerItem.click(function() {
+    $playerItem.hover(function() {
         $(this).find('span').toggleClass('opacity_none');
         $playerItem.not(this).find('span').removeClass('opacity_none');
     });
