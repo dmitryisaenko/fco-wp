@@ -529,21 +529,23 @@ function fco_customize_register( $wp_customize ) {
         
 
         $wp_customize->add_setting(
-            'fco_ex_settings_seson',
+            'fco_ex_settings_season',
             array(
                 'transport'         => 'refresh',
             ) 
         );
 
+        //Готовим массив из значений таксономии "Сезоны"
         $wp_customize->add_control( 
             new WP_Customize_Control( 
                 $wp_customize, 
-                'fco_ex_settings_seson', 
+                'fco_ex_settings_season', 
                 array(
                     'label'      => 'Дата поточного сезону',
                     'section'    => 'fco_ex_settings',
-                    'settings'   => 'fco_ex_settings_seson',
-                    'type' => 'text',
+                    'settings'   => 'fco_ex_settings_season',
+                    'type' => 'select',
+                    'choices' => get_terms(['taxonomy' => 'season', 'fields' => 'id=>name']),
                 )
             )
         );

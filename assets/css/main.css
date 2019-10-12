@@ -552,10 +552,10 @@ main {
   text-transform: uppercase;
 }
 .info-block__team-title--home {
-  padding-right: 3px;
+  /* padding-right: 3px; */
 }
 .info-block__team-title--away {
-  padding-left: 3px;
+  /* padding-left: 3px; */
 }
 .info-block__team--goal-player {
   font-weight: 100;
@@ -3492,4 +3492,16 @@ section.footer-wrap {
 .menu-bottom-wrap .menu-bottom li.menu-item-has-children ul.sub-menu > li:hover {
   background: #eee;
   border-top: none;
+}
+.content-present{
+  color: green;
+  font-size: 46px;
+  vertical-align: middle;
+  margin: 0px 20%;
+}
+.content-notpresent{
+  color: red!important;
+  font-size: 66px;
+  vertical-align: middle;
+  margin: 0px 20%;
 }

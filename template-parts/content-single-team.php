@@ -13,12 +13,12 @@ if ( $role->term_id !== 279 ) //Если НЕ игрок
 }
 elseif ( $player_category->term_id === 282 ) //Если вратарь
 {
-    echo 'Если вратарь';
+    // echo 'Если вратарь';
     $weight = '<div class="weight_wrapper"><p class="weight">' .get_field('weight') . 'кг. ' . get_field('height') . 'см.</p></div>';
     $title = $player_category->name;
     $subheader = '
     <div class="team-single-subheader-top">
-        <h3>Сезон ' . get_theme_mod('fco_ex_settings_seson') . '</h3>
+        <h3>Сезон ' . get_term(get_theme_mod('fco_ex_settings_season'))->name . '</h3>
         <div>' . get_field('matches') . '</div>
         <div>' . get_field('start_sklad') . '</div>
         <div>' . get_field('player_changed') . '</div>
@@ -59,7 +59,7 @@ else //Если игрок, но НЕ вратарь
     $title = $player_category->name;
     $subheader = '
     <div class="team-single-subheader-top">
-        <h3>Сезон ' . get_theme_mod('fco_ex_settings_seson') . '</h3>
+        <h3>Сезон ' . get_term(get_theme_mod('fco_ex_settings_season'))->name . '</h3>
         <div>' . get_field('matches') . '</div>
         <div>' . get_field('start_sklad') . '</div>
         <div>' . get_field('player_changed') . '</div>

@@ -54,8 +54,8 @@
 		</section>
 	</section>
 	<div class="ads-block-top">
-	<a href="<?=get_theme_mod('fco_load_url_shop');?>" taret="_blank">
-		<img src="<?=get_theme_mod('fco_load_baner_shop');?>" alt="">
-	</a>
-</div>
+		<a href="<?=get_theme_mod('fco_load_url_shop');?>" taret="_blank">
+			<img src="<?=get_theme_mod('fco_load_baner_shop');?>" alt="">
+		</a>
+	</div>
 </main>

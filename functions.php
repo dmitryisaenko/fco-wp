@@ -336,8 +336,8 @@ function register_post_types(){
 		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
 		'hierarchical'        => true,
-		'supports'            => [ 'title', 'editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-		'taxonomies'          => ['season,tournament,stadium,referee'],
+		'supports'            => [ 'title' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => ['season','tournament','stadium'],
 		'has_archive'         => false,
 		// 'rewrite'             => array('slug' => 'team'),
 		'query_var'           => true,
@@ -351,7 +351,7 @@ function register_post_types(){
 			'add_new'            => 'Додати футбольну команду', // для добавления новой записи
 			'add_new_item'       => 'Додати футбольну команду', // заголовка у вновь создаваемой записи в админ-панели.
 			'edit_item'          => 'Редагувати футбольну команду', // для редактирования типа записи
-			'new_item'           => 'Новиа футбольна команда', // текст новой записи
+			'new_item'           => 'Нова футбольна команда', // текст новой записи
 			'view_item'          => 'Футбольні команди', // для просмотра записи этого типа.
 			'search_items'       => 'Шукати футбольну команду', // для поиска по этим типам записи
 			'not_found'          => 'Не знайдено', // если в результате поиска ничего не было найдено
@@ -376,7 +376,46 @@ function register_post_types(){
 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
 		'hierarchical'        => true,
 		'supports'            => ['title'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-		'taxonomies'          => ['season,tournament,stadium,referee'],
+		'taxonomies'          => null,
+		'has_archive'         => false,
+		// 'rewrite'             => array('slug' => 'team'),
+		'query_var'           => true,
+	) );
+
+	register_post_type('ligeas', array(
+		'label'  => null,
+		'labels' => array(
+			'name'               => 'Ліга', // основное название для типа записи
+			'singular_name'      => 'Ліга', // название для одной записи этого типа
+			'add_new'            => 'Додати лігу', // для добавления новой записи
+			'add_new_item'       => 'Додати лігу', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редагувати лігу', // для редактирования типа записи
+			'new_item'           => 'Нова ліга', // текст новой записи
+			'view_item'          => 'Ліга', // для просмотра записи этого типа.
+			'search_items'       => 'Шукати лігу', // для поиска по этим типам записи
+			'not_found'          => 'Не знайдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не знайдено в корзині', // если не было найдено в корзине
+			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+			'menu_name'          => 'Ліга-лого', // название меню
+		),
+		'description'         => '',
+		'public'              => true,
+		// 'publicly_queryable'  => null, // зависит от public
+		'exclude_from_search' => true, // зависит от public
+		// 'show_ui'             => null, // зависит от public
+		// 'show_in_nav_menus'   => null, // зависит от public
+		'show_in_menu'        => null, // показывать ли в меню адмнки
+		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
+		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
+		'rest_base'           => null, // $post_type. C WP 4.7
+		'menu_position'       => null,
+		'menu_icon'           => 'dashicons-megaphone', 
+		//'capability_type'   => 'post',
+		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+		'hierarchical'        => true,
+		'supports'            => ['title'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => null,
 		'has_archive'         => false,
 		// 'rewrite'             => array('slug' => 'team'),
 		'query_var'           => true,
@@ -402,6 +441,26 @@ function create_team_taxonomies(){
 		'show_ui'       => true,
 		'show_admin_column' => true,
 		'show_in_menu'	=> false,
+		'query_var'     => true,
+		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
+	));
+
+	register_taxonomy('age-group-match', array('match'), array(
+		'hierarchical'  => true,
+		'labels'        => array(
+			'name'              => 'Вікова група',
+			'singular_name'     => 'Вікова група',
+			'search_items'      => 'Пошук групи',
+			'all_items'         => 'Усі групи',
+			'edit_item'         => 'Редагувати групу',
+			'update_item'       => 'Оновити групу',
+			'add_new_item'      => 'Додати групу',
+			'new_item_name'     => 'Нова група',
+			'menu_name'         => 'Вікова група',
+		),
+		'show_ui'       => true,
+		'show_admin_column' => true,
+		'show_in_menu'	=> true,
 		'query_var'     => true,
 		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
 	));
@@ -503,25 +562,7 @@ function create_team_taxonomies(){
 		'query_var'     => true,
 		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
 	));
-	register_taxonomy('referee', array('match'), array(
-		'hierarchical'  => true,
-		'labels'        => array(
-			'name'              => 'Рефері',
-			'singular_name'     => 'Рефері',
-			'search_items'      => 'Пошук рефері',
-			'all_items'         => 'Усі рефері',
-			'edit_item'         => 'Редагувати рефері',
-			'update_item'       => 'Оновити рефері',
-			'add_new_item'      => 'Додати рефері',
-			'new_item_name'     => 'Новий рефері',
-			'menu_name'         => 'Рефері',
-		),
-		'show_ui'       => true,
-		'show_admin_column' => false,
-		'show_in_menu'	=> true,
-		'query_var'     => true,
-		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
-	));
+	
 }
 
 add_theme_support( 'post-formats', array( 'video', 'gallery' ) );
@@ -531,14 +572,17 @@ add_action( 'restrict_manage_posts', 'filter_by_taxonomies' , 10, 2);
 function filter_by_taxonomies( $post_type, $which ) {
 
 	// Apply this only on a specific post type
-	if ( 'team' !== $post_type )
-		return;
-
-	// A list of taxonomy slugs to filter by
-	$taxonomies = array( 'age-group', 'role', 'player_category' );
+	if ( $post_type === 'team' ){
+		// A list of taxonomy slugs to filter by
+		$taxonomies = array( 'age-group', 'role', 'player_category' );
+	}
+	elseif ( $post_type === 'match' ){
+		// A list of taxonomy slugs to filter by
+		$taxonomies = array( 'age-group-match', 'season', 'tournament', 'stadium' );
+	}
+	else return;
 
 	foreach ( $taxonomies as $taxonomy_slug ) {
-
 		// Retrieve taxonomy data
 		$taxonomy_obj = get_taxonomy( $taxonomy_slug );
 		$taxonomy_name = $taxonomy_obj->labels->all_items;
@@ -602,22 +646,57 @@ function team_custom_column ( $column, $post_id ) {
 	}
 }
 
-
-//Выводим превьюшку поста в таблице со списком постов
-add_filter('manage_posts_columns', 'add_img_post_column');
-function add_img_post_column($columns) {
-	$columns = array_slice($columns, 0, 1, true) + array("img_attached" => "Превью") + array_slice($columns, 1, count($columns) - 1, true);
+//Выводим превьюшку поста в таблице со списком турниров
+add_filter('manage_match_posts_columns', 'add_img_match_post_column');
+function add_img_match_post_column($columns) {
+	$columns = array_slice($columns, 0, 1, true) + array("tour_number" => "Тур", "img_attached" => "Превью", 'date_tour' => 'Дата') + array_slice($columns, 1, count($columns) - 1, true) + array('photo' => 'Фотозвіт', 'video' => 'Відеозвіт');
+	unset($columns['date']);
 	return $columns;
 }
+//Доп. функция для вывода превью турнира:
+add_action ( 'manage_match_posts_custom_column', 'post_maych_custom_column', 10, 2 );
+function post_maych_custom_column ( $column, $post_id ) {
+	$present = " style = 'color: green; font-size: 26px; vertical-align: middle; margin: 0px 20%;'";
+	$notpresent = " style = 'color: red; font-size: 46px; vertical-align: middle; margin: 0px 20%;'";
+	$terms = get_terms(['taxonomy' => 'season', 'fields' => 'id=>name']);
+        
+	switch ( $column ) {
+		case 'tour_number':
+			echo get_field('tour_number');
+			break;
+		case 'img_attached':
+			$id_post_zvit = get_field('tour_zvit_text');
+			echo '<a href="' . get_edit_post_link() . '">';
+			echo get_the_post_thumbnail($id_post_zvit, [64,64]);
+			echo '</a>';
+			break;
+		case 'date_tour' :
+			echo get_field('tour_date');
+			break;
+		case 'photo' :
+			if (get_field('tour_zvit_photo')) echo "<span $present>+</span>"; else echo "<span $notpresent>-</span>";
+			break;
+		case 'video' :
+			if (get_field('tour_zvit_video')) echo "<span $present'>+</span>"; else echo "<span $notpresent'>-</span>";
+			break;
+	}
+	
+}
+
+
 //Доп. функция для вывода превью поста:
 add_action ( 'manage_posts_custom_column', 'post_custom_column', 10, 2 );
 function post_custom_column ( $column, $post_id ) {
 	if ( $column === 'img_attached' ) {
+		echo get_post_type( $post_id ).'777';
 		echo '<a href="' . get_edit_post_link() . '">';
 		echo get_the_post_thumbnail($post_id, [64,64]);
 		echo '</a>';
 	}
 }
+
+
+
 
 //Выводим превьюшку участника в таблице со списком слайдеров
 add_filter('manage_wxas_slider_posts_columns', 'add_wxas_slider_column');
