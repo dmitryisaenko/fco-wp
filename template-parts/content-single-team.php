@@ -123,7 +123,8 @@ function getAge($date) {
             <p class="civil"><?=get_field('citizenship')?></p>
         </div>
         <div class="team-single-header-img">
-            <img class="img-responsive" src="<?=get_field('member_photo_big')?>" alt="">
+            <img class="img-responsive" src="<?=get_field('member_photo_big')?>" alt="<?=get_field('member_familyname')?> <?=get_field('member_name')?>">
+            <div class="players-number"><?=get_field('player_number')?></div>
         </div>
     </div>
     <div id="nav-previous" class="team-single-header-nav_perv">

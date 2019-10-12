@@ -891,7 +891,7 @@ function fco_member_items($age_group, $role, $player_category = '', $block_width
 					echo '<div class="w' . $block_width .' team-block-item">';
 					echo '            <a href="' . get_the_permalink() . '">';
 					echo '                <div class="team-block-item-img">';
-					echo '                    <img class="img-responsive" src="' . get_field('member_photo_small') . '" width="260" height="220" alt="">';
+					echo '                    <img class="img-responsive" src="' . get_field('member_photo_small') . '" width="260" height="220" alt="' . get_field('member_familyname') . ' " " ' . get_field('member_name') . '">';
 					echo '                </div>';
 					echo '					<div class="team-block-item-content-nonplayers">';
 					echo '				<div class="team-block-item-content-nonplayers-firstname">';
