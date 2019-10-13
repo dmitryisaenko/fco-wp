@@ -144,25 +144,74 @@
         return $result;
     }
 
-    //Списко команд
+    //Список команд
     function teamList($teamName, $teamType){ 
         if ($teamName === 'fco') {
             ($teamType === 'start') ? $teamType = 'fco_start_list' : $teamType = 'fco_substitute_list';
         }
         else ($teamType === 'start') ? $teamType = 'opp_start_list' : $teamType = 'opp_substitute_list';
         if (!get_field($teamType)) return '';
-        $playersID = get_field($teamType);
-        foreach ($playersID as $playerID){
-            $playerNumber = get_post_meta ( $playerID, 'player_number', true );
-            print_r($playerNumber);
+        $result = '';
+        if ($teamName === 'fco'){
+            $playersID = get_field($teamType);
+            foreach ($playersID as $playerID){
+                $playerNumber = get_post_meta ( $playerID, 'player_number', true );
+                $playerName = get_the_title( $playerID );
+                $result .= "
+                    <tr>
+                        <td>$playerNumber</td>
+                        <td>$playerName</td>
+                    </tr>
+                ";
+                }
+            }
+        else{
+            $playersData = explode("\n", str_replace("\r", "", get_field($teamType)));
+            foreach ($playersData as $playerData){
+                $playerData_array = explode(',', $playerData);
+                $result .= "
+                    <tr>
+                        <td>$playerData_array[0]</td>
+                        <td>$playerData_array[1]</td>
+                    </tr>
+                ";
+            }
+            // print_r($playersData);
+            // $result = "opp";
+        } 
+        return $result;
+    }
+
+    //Арбитры
+    function referee_list(){
+        if (!get_field('referee')) return '';
+        $referees = explode("\n", str_replace("\r", "", get_field('referee')));
+        $result = '';
+        foreach ($referees as $referee){
+            if ($referee === '') return $result;
+            $refereeArray = explode(':', $referee);
+            $refereeTitle = $refereeArray[0];
+            $refereeNameArray = explode(',', $refereeArray[1]);
+            $refereeNamesTemp = '';
+            foreach($refereeNameArray as $refereeName){
+                $refereeNamesTemp .= "<div class='team-block__referee-name'>$refereeName</div>";
+            }
+            if (count($refereeNameArray) >= 2) $refereeNames = "<div class='referees_wrap column-direction'>$refereeNamesTemp</div>";
+            else $refereeNames = $refereeNamesTemp;
+            $result .= "
+                <div class='referee-block__item'>
+                    <div class='team-block__referee'>
+                    $refereeTitle
+                    </div>
+                    $refereeNames
+                </div>
+            ";
         }
+        return $result;
     }
     
     ?>
-    <!-- <tr>
-        <td>21</td>
-        <td>Ткаченко Олександр</td>
-    </tr> -->
+    <!--  -->
 <!-- Основное содержимое страниц -->
 <main>
         <div class="breadcrumb-wrapper">
@@ -291,51 +340,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <? echo teamList('fco', 'start')?>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр (К)</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
+                                                <? 
+                                                if (get_field('tour_is_home')) echo teamList('fco', 'start');
+                                                else echo teamList('opp', 'start');
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -354,50 +362,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр (К)</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
+                                                <? 
+                                                    if (get_field('tour_is_home')) echo teamList('opp', 'start');
+                                                    else echo teamList('fco', 'start');
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -423,34 +391,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
+                                                <? 
+                                                    if (get_field('tour_is_home')) echo teamList('fco', 'substitute');
+                                                    else echo teamList('opp', 'substitute');
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -469,34 +413,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21</td>
-                                                    <td>Ткаченко Олександр</td>
-                                                </tr>
+                                                <? 
+                                                    if (get_field('tour_is_home')) echo teamList('opp', 'substitute');
+                                                    else echo teamList('fco', 'substitute');
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -518,7 +438,10 @@
                                         </div>
                                         <div class="team-block__item">
                                             <div class="team-block__item--player">
-                                                Косовський Віталій
+                                            <?
+                                                if (get_field('tour_is_home')) echo get_field('fco_referee');
+                                                else echo get_field('opp_referee');
+                                            ?>
                                             </div>
                                         </div>
                                     </div>
@@ -531,7 +454,10 @@
                                         </div>
                                         <div class="team-block__item">
                                             <div class="team-block__item--player">
-                                                Шаран Володимир
+                                            <?
+                                                if (get_field('tour_is_home')) echo get_field('opp_referee');
+                                                else print_r(get_field('fco_referee')[0]->post_title);
+                                            ?>
                                             </div>
                                         </div>
                                     </div>
@@ -542,44 +468,7 @@
                                     <span>Арбітри</span>
                                 </h3>
                                 <div class="referee-block">
-                                    <div class="referee-block__item">
-                                        <div class="team-block__referee">
-                                            Головний арбітр
-                                        </div>
-                                        <div class="team-block__referee-name">
-                                            Козик Ярослав
-                                        </div>
-                                    </div>
-                                    <div class="referee-block__item">
-                                        <div class="team-block__referee">
-                                            Асистенти арбітра
-                                        </div>
-                                        <div class="referees_wrap column-direction">
-                                                <div class="team-block__referee-name">
-                                                        Коротін Володимир
-                                                    </div>
-                                                <div class="team-block__referee-name">
-                                                        Коротін Володимир
-                                                    </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="referee-block__item">
-                                        <div class="team-block__referee">
-                                            Четвертий арбітр
-                                        </div>
-                                        <div class="team-block__referee-name">
-                                            Бондаренко Дмитро
-                                        </div>
-                                    </div>
-                                    <div class="referee-block__item">
-                                        <div class="team-block__referee">
-                                            Суддівський спостерігач
-                                        </div>
-                                        <div class="team-block__referee-name">
-                                            Лучі Лучано
-                                        </div>
-                                    </div>
+                                    <?=referee_list();?>
                                 </div>
                             </div>
                         </div>

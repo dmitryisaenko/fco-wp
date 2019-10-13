@@ -3132,6 +3132,10 @@ ul.horizontal-tabs-list li.active {
   color: #27282C;
   padding: 5px 2px;
 }
+.matches-center-table tbody td:first-child,
+.matches-center-table thead th:first-child {
+  text-align: center;
+}
 .matches-center-table tr:nth-child(2n),
 .referee-block .referee-block__item:nth-child(2n),
 .team-block .team-block__item:nth-child(n+1):nth-child(odd) {
