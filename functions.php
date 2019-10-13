@@ -416,8 +416,8 @@ function register_post_types(){
 		'hierarchical'        => true,
 		'supports'            => ['title'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
 		'taxonomies'          => null,
-		'has_archive'         => false,
-		// 'rewrite'             => array('slug' => 'team'),
+		'has_archive'         => true,
+		'rewrite'             => array('slug' => 'ligeas'),
 		'query_var'           => true,
 	) );
 }
@@ -607,7 +607,6 @@ function filter_by_taxonomies( $post_type, $which ) {
 
 }
 
-
 //Выводим превьюшку участника в таблице со списком учасников клуба
 add_filter('manage_team_posts_columns', 'add_img_column');
 function add_img_column($columns) {
@@ -681,6 +680,22 @@ function post_maych_custom_column ( $column, $post_id ) {
 			break;
 	}
 	
+}
+
+//Выводим превьюшку лого в таблице со списком турниров
+add_filter( "manage_edit-tournament_columns", 'custom_column_header', 10);
+function custom_column_header( $columns ){
+    $columns['tour_logo'] = 'Лого';
+    return $columns;
+}
+
+add_action( "manage_tournament_custom_column", 'custom_column_content', 10, 3);
+function custom_column_content( $value, $column_name, $term_id ){
+    if ($column_name === 'tour_logo') {
+		$thumb = get_field('liga-logo', 'category_'.$term_id);
+		echo wp_get_attachment_image($thumb, 'thumbnail');
+    }
+    return $columns;
 }
 
 
