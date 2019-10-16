@@ -868,9 +868,15 @@
   .group-protocol__item {
     margin: 5px;
   }
+  .matches-calendar-table tbody td:nth-child(2) {
+    flex-basis: 15%;
+}
 }
 /*576 и меньше */
 @media only screen and (max-width: 576px) {
+  .matches-calendar-table tbody td:nth-child(2) {
+    flex-basis: 21%;
+}
   header {
     height: 190px;
     margin-top: 10px;

@@ -337,8 +337,8 @@ function register_post_types(){
 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
 		'hierarchical'        => true,
 		'supports'            => [ 'title' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-		'taxonomies'          => ['season','tournament','stadium'],
-		'has_archive'         => false,
+		'taxonomies'          => ['age-groupe-match', 'season','tournament','stadium'],
+		'has_archive'         => true,
 		// 'rewrite'             => array('slug' => 'team'),
 		'query_var'           => true,
 	) );
@@ -462,7 +462,7 @@ function create_team_taxonomies(){
 		'show_admin_column' => true,
 		'show_in_menu'	=> true,
 		'query_var'     => true,
-		// 'rewrite'       => array( 'slug' => 'team', "with_front" => false ), // свой слаг в URL
+		'rewrite'       => array( 'slug' => 'age-group-match', "with_front" => false ), // свой слаг в URL
 	));
 	
 	register_taxonomy('role', array('team'), array(
@@ -605,6 +605,19 @@ function filter_by_taxonomies( $post_type, $which ) {
 		echo '</select>';
 	}
 
+}
+
+//Выводим ID статьи в таблице со списком статей
+add_filter('manage_post_posts_columns', 'add_id_column');
+function add_id_column($columns) {
+	$columns = $columns + array("id" => "ID");
+	return $columns;
+}
+add_action( "manage_post_posts_custom_column", 'id_column_content', 10, 3);
+function id_column_content( $column_name ){
+    if ($column_name === 'id') {
+		echo get_the_ID();
+    }
 }
 
 //Выводим превьюшку участника в таблице со списком учасников клуба
@@ -1068,6 +1081,14 @@ add_filter( 'rewrite_rules_array', 'wspe16902_prepend_page_rewrite_rules' );
 function wspe16902_prepend_page_rewrite_rules( $rewrite_rules )
 {
     return $GLOBALS['wpse16902_page_rewrite_rules'] + $rewrite_rules;
+}
+
+function secureData($data) {
+	foreach($data as $key => $value) {
+		if (is_array($value)) secureData($value);
+		else $data[$key] = htmlspecialchars(trim($value));
+	}
+	return $data;
 }
 
  ?>

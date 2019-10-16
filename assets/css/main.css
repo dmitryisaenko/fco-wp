@@ -483,6 +483,7 @@ main {
   margin-right: 7px;
   color: #737373;
   font-size: 11px;
+  align-self: center;
 }
 .info-block__logo img {
   height: 25px;
@@ -2902,8 +2903,11 @@ h1.page-header__matches-exluded::before {
       justify-content: space-around;
   border-right: 1px solid #E0E8EC;
 }
+.matches-calendar-table tbody td:nth-child(2){
+  flex-basis: 7%;
+}
 .matches-calendar-table td span {
-  display: block;
+  /* display: block; */
   margin: auto;
 }
 .matches-calendar-table td img {
@@ -3126,8 +3130,7 @@ ul.horizontal-tabs-list li.active {
   color: #27282C;
   padding: 5px 2px;
 }
-.matches-center-table tbody td:first-child,
-.matches-center-table thead th:first-child {
+.matches-center-table tbody td:first-child {
   text-align: center;
 }
 .matches-center-table tr:nth-child(2n),

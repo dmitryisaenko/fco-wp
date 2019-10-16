@@ -82,19 +82,20 @@
             $result = '';
             $goals = explode("\n", str_replace("\r", "", get_field($team)));
             foreach ($goals as $goal){
-                $result .= '<span class="info-block__team--goal-player">' . $goal . '</span>';
+                $result .= '<span class="info-block__team--goal-player">' . $goal . '\'</span>';
             }
             return $result;
         }
     }
     //Список голов в теле
     function goals_list_body($team){
+        $result = '';
         ($team === 'fco') ? $team = 'fco_goals' : $team = 'opp_goals';
         $result = '';
         if (get_field($team)) {
             $goals = explode("\n", str_replace("\r", "", get_field($team)));
             foreach ($goals as $goal){
-                $result .= '<div class="team-block__item"><div class="team-block__item--player">' . $goal . '</div></div>';
+                $result .= '<div class="team-block__item"><div class="team-block__item--player">' . $goal . '\'</div></div>';
             }
         }
         return $result;
@@ -128,8 +129,7 @@
                 }
                 $result .= '<div class="team-block__item">
                 <div class="team-block__item--player">
-                    ' . $warning_array[0] . '
-                </div>
+                    ' . $warning_array[0] . '\'</div>
                 <div class="team-block__item--player_card">
                 ' . $cards . '
                     
@@ -216,15 +216,15 @@
             <div class="breadcrumb"><a href="/">Головна</a> / <span><span>Матчі </span> / Календар / <? the_title(); ?></span></div>
         </div>
         <?
-            $terms = get_terms( [
-                'taxonomy' => 'tournament',
-                'fields' => 'id=>name'
-            ] );
-            foreach ($terms as $key => $value){
-                $thumb = get_field('liga-logo', 'category_'.$key);
-                $url_logo = wp_get_attachment_image_url($thumb, 'full');
-                $alt_logo = $value;
-            }
+            $logo_data = get_the_terms($the_ID, 'tournament');
+            $thumb = get_field('liga-logo', 'category_'.$logo_data[0]->term_id);
+            $url_logo = wp_get_attachment_image_url($thumb, 'full');
+            $alt_logo = $logo_data[0]->name;
+            // foreach ($terms as $key => $value){
+            // }
+            // echo '<pre>';
+            // print_r($logo_data[0]->name);
+            // echo '<pre>';
             // print_r($key);
             // echo $alt_logo;
             // print_r(get_term(287));
@@ -235,7 +235,8 @@
                     <div class="info-block__body">
                         <div class="info-block__logo">
                             <div class="info-block__logo--tur">
-                                <?=get_field('tour_number')?>-й тур<br>сезон <?=get_the_terms($the_ID, 'season')[0]->name?>
+                                <? if (get_field('tour_number')) echo get_field('tour_number').'-й тур<br>';?>
+                                сезон <?=get_the_terms($the_ID, 'season')[0]->name?>
                             </div>
                             <img src="<?=$url_logo?>" alt="<?=$alt_logo?>" title="<?=$alt_logo?>">
                         </div>
@@ -258,9 +259,9 @@
                 <div class="matches-center__horizontal-tabs-list tabs">
                     <ul class="horizontal-tabs-list tabs__caption">
                         <li class="active">Протокол</li>
-                        <li>Звіт</li>
-                        <li>Фото</li>
-                        <li>Відео</li>
+                        <?if ( get_field('tour_zvit_text') ) echo '<li>Звіт</li>';?>
+                        <?if ( get_field('tour_zvit_photo') ) echo '<li>Фото</li>';?>
+                        <?if ( get_field('tour_zvit_video') ) echo '<li>Відео</li>';?>
                     </ul>
 
                     <div id="match-protocol" class="tabs__content active">
@@ -277,12 +278,10 @@
                                                 else echo get_field('opp_select')->post_title;
                                             ?>
                                         </div>
-                                        <div class="team-block__item">
-                                            <?
-                                                if (get_field('tour_is_home')) echo goals_list_body('fco');
-                                                else echo goals_list_body('opp');
-                                            ?>
-                                        </div>
+                                        <?
+                                            if (get_field('tour_is_home')) echo goals_list_body('fco');
+                                            else echo goals_list_body('opp');
+                                        ?>
                                     </div>
                                     <div class="team-block">
                                         <div class="team-block__team-name">
@@ -486,51 +485,59 @@
                     </div>
                     <div id="match-zvit" class="tabs__content">
                         <section class="main-container container">
-                        <?php 
+                        <?php
+                            if ( get_field('tour_zvit_text') ){
                             $query = new WP_Query( 'p='.$id_post );
-                            while ( $query->have_posts() ) : 	$query->the_post(); 
-                        ?>
-                            <div class="news-single-header">
-                                <div class="news-single-header-logo">
-                                <?php the_post_thumbnail('', ['class' => "img-responsive"]); ?>
-                                </div>
-                                <div class="news-single-subheader">
-                                    <div class="news-single-subheader-title">
-                                        <h1>
-                                        <? the_title() ?>
-                                        </h1>
-                                    </div>
-                                    <div class="news-single-subheader-info">
-                                        <div class="top-line">
-                                            <div class="news-single-subheader-info-date">
-                                            <?=get_the_date('d.m.Y G:i'); ?>
-                                            </div>
-                                            <div class="news-single-subheader-info-news_title">
-                                                Звіт
-                                            </div>
+                            $query->the_post(); 
+                    
+                            echo '<div class="news-single-header">
+                                <div class="news-single-header-logo">'
+                                .the_post_thumbnail('', ['class' => "img-responsive"]).
+                                '</div>
+                                    <div class="news-single-subheader">
+                                        <div class="news-single-subheader-title">
+                                            <h1>'
+                                            .get_the_title().
+                                            '</h1>
                                         </div>
-                                        <div class="bottom-line">
-                                            <a class="facebook_icon social-icon-item" target="_blank" href="http://www.facebook.com/sharer.php?u=<? the_permalink( ); ?>&t=<? the_title(); ?>"></a>
-                                            <a class="twitter_icon social-icon-item" target="_blank" href="http://twitter.com/share?text=<? the_title(); ?>. Дізнатися більше: &url=<? the_permalink( ); ?>"></a>
-                                        </div>
+                                        <div class="news-single-subheader-info">
+                                            <div class="top-line">
+                                                <div class="news-single-subheader-info-date">'
+                                                .get_the_date('d.m.Y G:i').
+                                                '</div>
+                                                <div class="news-single-subheader-info-news_title">
+                                                    Звіт
+                                                </div>
+                                            </div>
+                                            <div class="bottom-line">
+                                                <a class="facebook_icon social-icon-item" target="_blank" href="http://www.facebook.com/sharer.php?u='.get_the_permalink( ).'&t='.get_the_title().'"></a>
+                                                <a class="twitter_icon social-icon-item" target="_blank" href="http://twitter.com/share?text='.get_the_title().'. Дізнатися більше: &url='. get_the_permalink( ).'"></a>
+                                            </div>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <section class="main-content media_991">
-                                <div class="central-content central-content-news-single">
-                                    <? the_content(); ?>
-                                </div>
-                        <? endwhile;?>
-                                <? get_sidebar(); ?>
-                            </section>
+                                <section class="main-content media_991">
+                                    <div class="central-content central-content-news-single">'
+                                        .apply_filters( 'the_content', get_the_content() ).
+                                    '</div>';
+                                echo get_sidebar();
+                                echo '</section>';
+                            }
+                            else {
+                                echo '<h3>Звіт ще не опублікований</h3>';
+                            }
+                            ?>
+                            
                         </section>
                         <? wp_reset_query(); ?>
                     </div>
                     <div id="match-foto" class="tabs__content">
                     <section class="main-container container">
                         <?
-                            echo do_shortcode('[wxas id="704"]');
+                            if (get_field('tour_zvit_photo'))
+                                echo do_shortcode('[wxas id="' . get_field('tour_zvit_photo') . '"]');
+                            else echo '<h3>Фотозвіт ще не опублікований</h3>';
                         ?>
                     </section>
                     </div>
@@ -538,7 +545,12 @@
                         <section class="main-container container">
                             <div class="news-single-header-logo">
                                 <div class="youtube-video-frame">
-                                    <iframe class="youtube-video" src="https://www.youtube.com/embed/<?=$id_video?>" frameborder="0" allowfullscreen></iframe>
+                                    <?
+                                        if (get_field('tour_zvit_video'))
+                                            echo '<iframe class="youtube-video" src="https://www.youtube.com/embed/' . $id_video . '" frameborder="0" allowfullscreen></iframe>';
+                                        else echo '<h3>Відеозвіт ще не опублікований</h3>';
+                                    ?>
+                                    
                                 </div>
                             </div>
                         </section>
