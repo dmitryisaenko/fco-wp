@@ -232,27 +232,7 @@
         <section class="main-container container">
             <div class="info-block info-block__match-center">
                 <div class="info-block-container info-block-container__wo-top-border info-block-container__wo-top-border--match-center">
-                    <div class="info-block__body">
-                        <div class="info-block__logo">
-                            <div class="info-block__logo--tur">
-                                <? if (get_field('tour_number')) echo get_field('tour_number').'-й тур<br>';?>
-                                сезон <?=get_the_terms($the_ID, 'season')[0]->name?>
-                            </div>
-                            <img src="<?=$url_logo?>" alt="<?=$alt_logo?>" title="<?=$alt_logo?>">
-                        </div>
-                        <div class="info-block__meta">
-                            <span class="info-block__date">
-                                <?=get_field('tour_date')?>р.
-                            </span>
-                            <span class="info-block__stadium">
-                            <?=get_the_terms($the_ID, 'stadium')[0]->name?>
-                            </span>
-
-                        </div>
-                        <div class="info-block__kickoff-container">
-                            <?=$kickoff?>
-                        </div>
-                    </div>
+                    <?=showInfoBlock($the_ID, 'main', true)?>
                 </div>
             </div>
             <div class="macth-content-block">

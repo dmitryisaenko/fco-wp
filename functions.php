@@ -772,57 +772,7 @@ function fco_tags_function(){
 
 add_shortcode('fco_anonse', 'fco_anonse_function');
 function fco_anonse_function(){
-	$return = '<div class="widget-body">
-	<div class="info-block__body">
-		<div class="info-block__logo">
-			<div class="info-block__logo--tur">
-				9-й тур<br>сезон 2019/2020
-			</div>
-			<img src="img/upl.png" alt="">
-		</div>
-		<div class="info-block__meta">
-			<span class="info-block__date">
-				21 вересня 2019р
-			</span>
-			<span class="info-block__stadium">
-				КСК "Олімпійський", м.Київ
-			</span>
-
-		</div>
-		<div class="info-block__kickoff-container">
-			<div class="info-block__team-container">
-				<span class="info-block__team-title info-block__team-title--home">
-					Колос
-				</span>
-				<div class="info-block__team-img">
-					<img src="https://fco.com.ua/sites/default/files/styles/small/public/opponent/desna_0.png" alt="">
-				</div>
-			</div>
-			<div class="info-block__time">
-				<span class="clock-icon"></span>
-				<span class="knock_time">21:45</span>
-			</div>
-			<div class="info-block__team-container">
-				<div class="info-block__team-img">
-					<img src="https://fco.com.ua/sites/default/files/styles/original/public/opponent/olexandriya.png" alt="">
-				</div>
-				<span class="info-block__team-title info-block__team-title--away">
-					Олександрія
-				</span>
-
-			</div>
-		</div>
-		<div class="info-block__btn-container">
-			<a href="#" class="btn info-block__btn info-block__btn--single">
-				<span class="buy-ticket">Купити квіток</span>
-			</a>
-			<a href="#" class="btn info-block__btn info-block__btn--single">
-				<span class="match-center">Матч центр</span>
-			</a>
-		</div>
-	</div>
-</div>';
-    return $return;
+	return showInfoBlock('futureTournament', 'main');
 }
 
 include_once('customization.php');
@@ -1097,5 +1047,290 @@ function ukrainianDate($date){
 	$dateArray = explode('.', $date);
 	return $dateArray[0] . ' ' . $monthArray[(int)$dateArray[1]] . ' ' . $dateArray[2];
 }
+
+//Формируем код для показа инфоблока прошлого, текущего или будущего матча
+function showInfoBlock($tournamentType, $ageGroupSlag, $single_page = false){
+
+	$active_season_id = get_term(get_theme_mod('fco_ex_settings_season'))->term_id;
+
+	$query = new WP_Query( [
+		'post_type' => ['match'],
+		'tax_query' => [
+			// 'relation' => 'OR',
+			[
+				'taxonomy' => 'age-group-match',
+				'field'    => 'slug',
+				// 'terms'    => 'main',
+				'terms'    => [$ageGroupSlag],
+			],
+			[
+				'taxonomy' => 'season',
+				'field'    => 'id',
+				'terms'    => [$active_season_id],
+			],
+			// $tournament_query,
+		]
+	] );
+
+	while ( $query->have_posts() ) {
+        $query->the_post();
+		$postID = get_the_ID();
+		$tour_date_timestamp = strtotime(get_field('tour_date'));
+		$tourArrayForInfoBlocks[] = ['postID' => $postID, 'date' => $tour_date_timestamp];//Массив для вычисления прошлого и будущешо матча
+	}
+	$tourArrayForInfoBlocks[] = ['postID' => 0, 'date' => time()];//Добавляем текущую временную отметку, чтобы понимать, "где мы находимся"
+
+	//Сортируем полученный массив по возростанию даты:
+	uasort($tourArrayForInfoBlocks, function ($a, $b)
+        {
+            if ($a['date'] == $b['date']) return 0;
+            return $a['date'] > $b['date'] ? 1 : -1;
+        }
+    );
+
+    //"Выравниваем" нумерацию ключей:
+    $n = 1;
+    $result_tourArrayForInfoBlocks = [];
+    foreach($tourArrayForInfoBlocks as $tour){
+        $result_tourArrayForInfoBlocks[$n] = $tour;
+        $n++;
+    }
+	$tourArrayForInfoBlocks = $result_tourArrayForInfoBlocks;
+	
+	//Определяем ID прошлого и будущего турнира
+    $n = 1;
+    $currentTimePosition = '';
+    foreach ($tourArrayForInfoBlocks as $key => $value){
+        // echo '<pre>';
+        // print_r($value['postID']); 
+        // echo '</pre>';
+        if($value['postID'] === 0) $currentTimePosition = $n;
+        $n++;
+    }
+    if ($currentTimePosition === 1) {
+        $lastTournamentID = false;
+        $futureTournamentID = $tourArrayForInfoBlocks[2]['postID'];
+    }
+    elseif ($currentTimePosition === count($tourArrayForInfoBlocks)){
+        $lastTournamentID = $tourArrayForInfoBlocks[$currentTimePosition - 1]['postID'];
+        $futureTournamentID = false;
+    }
+    else{
+        $lastTournamentID = $tourArrayForInfoBlocks[$currentTimePosition - 1]['postID'];
+        $futureTournamentID = $tourArrayForInfoBlocks[$currentTimePosition + 1]['postID'];
+	}
+	
+	//Готовимся к выводу html-кода в зависимости о того, какой турнир нужно отобразить - прошлый, будущий или текуший (получаем lastTournament, futureTournament или ID текущего турнира):
+	if ($tournamentType === 'lastTournament'){
+		$tournamentID = $lastTournamentID;
+	}
+	elseif ($tournamentType === 'futureTournament'){
+		$tournamentID = $futureTournamentID;
+	}
+	else{
+		$tournamentID = (int)$tournamentType;
+	}
+
+	//Отдельный вид информ. окна для таблицы с одним турниром:
+	if (infoBlockInfo($tournamentID)['is_home']) {
+	$kickoff_single_page = '
+	<div class="info-block__team-container info-block__team-container__match-center">
+		<div class="info-block__team-title--wrapper">
+			<span class="info-block__team-title info-block__team-title--uppercase info-block__team-title--home">
+				Олександрія
+			</span>
+			' . goals_list('fco', $tournamentID) . '
+		</div>
+		<div class="info-block__team-img">
+			<img src="' . get_template_directory_uri() . '/assets/img/olexandriya.png"
+				alt="' . get_bloginfo('name') . '">
+		</div>
+	</div>
+	<div class="info-block__score">
+	<span>' . infoBlockInfo($tournamentID)['opp_goals'] .'</span>
+	<span>' . infoBlockInfo($tournamentID)['fco_goals'] .'</span>
+	</div>
+	<div class="info-block__team-container info-block__team-container__match-center">
+		<div class="info-block__team-img">
+			' . wp_get_attachment_image(infoBlockInfo($tournamentID)['opp_logo_id'], [64,64], '', ['alt' => get_field('opp_select')->post_title]) . '
+		</div>
+		<div class="info-block__team-title--wrapper">
+			<span class="info-block__team-title info-block__team-title--uppercase info-block__team-title--away">
+			' . infoBlockInfo($tournamentID)['opp_select']->post_title . '
+		</span>
+		' . goals_list('opp', $tournamentID) . '
+		</div>
+	</div>';
+	}
+else {
+	$kickoff_single_page = '
+	<div class="info-block__team-container info-block__team-container__match-center">
+		<div class="info-block__team-title--wrapper">
+			<span class="info-block__team-title info-block__team-title--uppercase info-block__team-title--home">
+			' . infoBlockInfo($tournamentID)['opp_select']->post_title . '
+			</span>
+			' . goals_list('opp', $tournamentID) . '
+		</div>
+		<div class="info-block__team-img">
+			' . wp_get_attachment_image(infoBlockInfo($tournamentID)['opp_logo_id'], [64,64], '', ['alt' => get_field('opp_select')->post_title]) . '
+		</div>
+	</div>
+	<div class="info-block__score">
+		<span>' . infoBlockInfo($tournamentID)['opp_goals'] .'</span>
+		<span>' . infoBlockInfo($tournamentID)['fco_goals'] .'</span>
+	</div>
+	<div class="info-block__team-container info-block__team-container__match-center">
+		<div class="info-block__team-img">
+		<img src="' . get_template_directory_uri() . '/assets/img/olexandriya.png"
+		alt="' . get_bloginfo('name') . '">
+		</div>
+		<div class="info-block__team-title--wrapper">
+			<span class="info-block__team-title info-block__team-title--uppercase info-block__team-title--away">
+			Олександрія
+			</span>
+			' . goals_list('fco', $tournamentID) . '
+	</div>';
+	}
+
+	//Выводим html-код:
+	$infoBlockResult = '<div class="info-block__body">
+	<div class="info-block__logo">
+	<div class="info-block__logo--tur">';
+if (get_field('tour_number', $tournamentID)) $infoBlockResult .= get_field('tour_number', $tournamentID).'-й тур<br>';
+	$infoBlockResult .= 'сезон' . get_the_terms($tournamentID, 'season')[0]->name.
+	'</div>';
+
+	$logo_data = get_the_terms($tournamentID, 'tournament');
+    $thumb = get_field('liga-logo', 'category_'.$logo_data[0]->term_id);
+    $url_logo = wp_get_attachment_image_url($thumb, 'full');
+	$alt_logo = $logo_data[0]->name;
+
+	$infoBlockResult .= "		<img src='$url_logo' alt='$alt_logo' title='$alt_logo'>";
+	$infoBlockResult .= '	</div>';
+	$infoBlockResult .= '	<div class="info-block__meta">';
+	$infoBlockResult .= '		<span class="info-block__date">';
+	$infoBlockResult .= 			ukrainianDate(get_field('tour_date', $tournamentID)) . 'р.';
+	$infoBlockResult .= '		</span>';
+	$infoBlockResult .= '		<span class="info-block__stadium">';
+	$infoBlockResult .=			get_the_terms($tournamentID, 'stadium')[0]->name;
+	$infoBlockResult .= '		</span>';
+	$infoBlockResult .= '	</div>';
+	
+	if ($single_page === false){
+		$infoBlockResult .= '	<div class="info-block__kickoff-container">';
+		$infoBlockResult .= '		<div class="info-block__team-container">';
+				if (infoBlockInfo($tournamentID)['is_home']) {
+		$infoBlockResult .= '			<span class="info-block__team-title info-block__team-title--home">';
+		$infoBlockResult .= '				Олександрія';
+		$infoBlockResult .= '			</span>';
+		$infoBlockResult .= '			<div class="info-block__team-img">';
+		$infoBlockResult .= '				<img src="' . get_template_directory_uri() . '/assets/img/olexandriya_logo_mini.png" alt="' . get_bloginfo('name') . '">';
+		$infoBlockResult .= '			</div>';
+				}
+				else {
+		$infoBlockResult .= '			<span>';
+		$infoBlockResult .=				infoBlockInfo($tournamentID)['opp_select']->post_title;
+		$infoBlockResult .= '			</span>';
+		$infoBlockResult .= '			<div class="info-block__team-img">';
+		$infoBlockResult .= 				wp_get_attachment_image(infoBlockInfo($tournamentID)['opp_logo_id'], 'fco-club-logo-small', '', ['alt' => infoBlockInfo($tournamentID)['opp_select']->post_title]);
+		$infoBlockResult .= '			</div>';
+				}
+		$infoBlockResult .= '		</div>';
+
+		if ($tournamentType === 'futureTournament'){
+			$infoBlockResult .= '		<div class="info-block__time">';
+			$infoBlockResult .= '			<span class="clock-icon"></span>';
+			$infoBlockResult .= '			<span class="knock_time">';
+			$infoBlockResult .= 				infoBlockInfo($tournamentID)['tour_time'];
+			$infoBlockResult .= '			</span>';
+			$infoBlockResult .= '		</div>';
+		}
+		else{
+			$infoBlockResult .= '		<div class="info-block__score">';
+			$infoBlockResult .= '			<span>';
+			$infoBlockResult .= 				(infoBlockInfo($tournamentID)['is_home']) ? infoBlockInfo($tournamentID)['fco_goals'] : infoBlockInfo($tournamentID)['opp_goals'];
+			$infoBlockResult .= '			</span>';
+			$infoBlockResult .= '			<span>';
+			$infoBlockResult .= 				(!infoBlockInfo($tournamentID)['is_home']) ? infoBlockInfo($tournamentID)['fco_goals'] : infoBlockInfo($tournamentID)['opp_goals'];
+			$infoBlockResult .= '			</span>';
+			$infoBlockResult .= '		</div>';
+		}
+
+		$infoBlockResult .= '		<div class="info-block__team-container">';
+				if (!infoBlockInfo($tournamentID)['is_home']) {
+		$infoBlockResult .= '			<div class="info-block__team-img">';
+		$infoBlockResult .= '				<img src="' . get_template_directory_uri() . '/assets/img/olexandriya_logo_mini.png"
+		alt="' . get_bloginfo('name') . '">';
+		$infoBlockResult .= '			</div>';
+		$infoBlockResult .= '			<span class="info-block__team-title info-block__team-title--home">';
+		$infoBlockResult .= '				Олександрія';
+		$infoBlockResult .= '			</span>';
+				}
+				else {
+		$infoBlockResult .= '			<div class="info-block__team-img">';
+		$infoBlockResult .=				wp_get_attachment_image(infoBlockInfo($tournamentID)['opp_logo_id'], 'fco-club-logo-small', '', ['alt' => infoBlockInfo($tournamentID)['opp_select']->post_title]);
+		$infoBlockResult .= '			</div>';
+		$infoBlockResult .= '			<span>';
+		$infoBlockResult .=				infoBlockInfo($tournamentID)['opp_select']->post_title;
+		$infoBlockResult .= '			</span>';
+				}
+		$infoBlockResult .= '		</div>';
+		$infoBlockResult .= '	</div>';
+
+		
+		
+		$infoBlockResult .= '	<div class="info-block__btn-container">';
+		if ($tournamentType === 'futureTournament'){
+			$infoBlockResult .= '	<a target="_blank" href="' . get_home_url() . '/buy-ticket?tournamentID=' . $tournamentID .'" class="btn info-block__btn info-block__btn--single">';
+			$infoBlockResult .= '		<span class="buy-ticket">Купити квіток</span>';
+			$infoBlockResult .= '	</a>';
+		}
+		$infoBlockResult .= '		<a target="_blank" href="' . infoBlockInfo($tournamentID)['tour_url'] .'" class="btn info-block__btn info-block__btn--single">';
+		$infoBlockResult .= ' 			<span class="match-center">Матч центр</span>';
+		$infoBlockResult .= '		</a>';
+		$infoBlockResult .= '	</div>';
+		$infoBlockResult .= '</div>';
+	}
+	else {
+		$infoBlockResult .= '	<div class="info-block__kickoff-container">';
+		$infoBlockResult .= $kickoff_single_page;
+		$infoBlockResult .= '</div>';
+		$infoBlockResult .= '</div>';
+		$infoBlockResult .= '</div>';
+	}
+	return $infoBlockResult;
+}
+
+//Вспомогательная функция - список голов:
+function goals_list($team, $tournamentID){
+	($team === 'fco') ? $team = 'fco_goals' : $team = 'opp_goals';
+	if (get_field('fco_goals', $tournamentID)) {
+		$result = '';
+		$goals = explode("\n", str_replace("\r", "", get_field($team, $tournamentID)));
+		foreach ($goals as $goal){
+			$result .= '<span class="info-block__team--goal-player">' . $goal . '\'</span>';
+		}
+		return $result;
+	}
+}
+
+//Вспомогательная функция для заполнения информ. таблицы:
+function infoBlockInfo($tourID){
+    $result = [];
+    $result['is_home'] = get_field('tour_is_home', $tourID);
+    $result['tour_time'] = (get_field('tour_time', $tourID)) ? date('H:i', strtotime(get_field('tour_time', $tourID))) : '00:00';
+    $result['opp_select'] = get_field('opp_select', $tourID);
+    $result['fco_goals'] = (get_field('fco-successful-goals', $tourID) !== '') ? get_field('fco-successful-goals', $tourID) : '_';
+    $result['fco_golas'] = ($result['fco_goals'] < 0) ? "<span style='color: red;'>" . $result['fco_goals'] . "</span>" : $result['fco_golas'];
+    $result['opp_goals'] = (get_field('opp-successful-goals', $tourID) !== '') ? get_field('opp-successful-goals', $tourID) : '_';
+    $result['opp_goals'] = ($result['opp_goals'] < 0) ? "<span style='color: red;'>" . $result['opp_goals'] . "</span>" : $result['opp_goals'];
+    $result['opp_logo_id'] = get_post_meta( $result['opp_select']->ID, 'fclub_logo',true );
+    $result['tour_url'] = get_permalink($tourID);
+    return $result;
+} 
+
+                                
+                            
+                            
 
  ?>

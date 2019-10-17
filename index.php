@@ -34,109 +34,14 @@ get_header();
 			<div class="info-block__header">
 				<h3>Попередній матч</h3>
 			</div>
-			<div class="info-block__body">
-				<div class="info-block__logo">
-					<div class="info-block__logo--tur">
-						8-й тур<br>сезон 2019/2020
-					</div>
-					<img src="img/upl.png" alt="">
-				</div>
-				<div class="info-block__meta">
-					<span class="info-block__date">
-						14 Вересня 2019р.
-					</span>
-					<span class="info-block__stadium">
-						КСК "Ніка", м.Олександрія
-					</span>
-
-				</div>
-				<div class="info-block__kickoff-container">
-					<div class="info-block__team-container">
-						<span class="info-block__team-title info-block__team-title--home">
-							Олександрія
-						</span>
-						<div class="info-block__team-img">
-							<img src="https://fco.com.ua/sites/default/files/styles/original/public/opponent/olexandriya.png"
-								alt="">
-						</div>
-					</div>
-					<div class="info-block__score">
-						<span>2</span>
-						<span>0</span>
-					</div>
-					<div class="info-block__team-container">
-						<div class="info-block__team-img">
-							<img src="https://fco.com.ua/sites/default/files/styles/original/public/opponent/desna_0.png"
-								alt="">
-						</div>
-						<span class="info-block__team-title info-block__team-title--away">
-							Дніпро-1
-						</span>
-
-					</div>
-				</div>
-				<div class="info-block__btn-container">
-					<a href="matches-center.html" class="btn info-block__btn info-block__btn--single">
-						<span class="match-center">Матч центр</span>
-					</a>
-				</div>
-			</div>
+			<?=showInfoBlock('lastTournament', 'main')?>
 
 		</div>
 		<div class="info-block-container next-info-block">
 			<div class="info-block__header">
 				<h3>Наступний матч</h3>
 			</div>
-			<div class="info-block__body">
-				<div class="info-block__logo">
-					<div class="info-block__logo--tur">
-						9-й тур</br>сезон 2019/2020
-					</div>
-					<img src="img/upl.png" alt="">
-				</div>
-				<div class="info-block__meta">
-					<span class="info-block__date">
-						21 вересня 2019р
-					</span>
-					<span class="info-block__stadium">
-						КСК "Олімпійський", м.Київ
-					</span>
-
-				</div>
-				<div class="info-block__kickoff-container">
-					<div class="info-block__team-container">
-						<span class="info-block__team-title info-block__team-title--home">
-							Колос
-						</span>
-						<div class="info-block__team-img">
-							<img src="https://fco.com.ua/sites/default/files/styles/small/public/opponent/desna_0.png"
-								alt="">
-						</div>
-					</div>
-					<div class="info-block__time">
-						<span class="clock-icon"></span>
-						<span class="knock_time">21:45</span>
-					</div>
-					<div class="info-block__team-container">
-						<div class="info-block__team-img">
-							<img src="https://fco.com.ua/sites/default/files/styles/original/public/opponent/olexandriya.png"
-								alt="">
-						</div>
-						<span class="info-block__team-title info-block__team-title--away">
-							Олександрія
-						</span>
-
-					</div>
-				</div>
-				<div class="info-block__btn-container">
-					<a href="#" class="btn info-block__btn info-block__btn--single">
-						<span class="buy-ticket">Купити квіток</span>
-					</a>
-					<a href="matches-center.html" class="btn info-block__btn info-block__btn--single">
-						<span class="match-center">Матч центр</span>
-					</a>
-				</div>
-			</div>
+			<?=showInfoBlock('futureTournament', 'main')?>
 
 		</div>
 		<div class="info-block-container">
