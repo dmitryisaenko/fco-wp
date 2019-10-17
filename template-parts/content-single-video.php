@@ -42,7 +42,7 @@
 			<? get_sidebar(); ?>
 		</section>
 		<section class="news-block">
-			<h2 class="block-title"><span>Читайте</span> також</h2>
+			<h2 class="block-title"><span>Дивіться</span> також</h2>
 			<div class="news-container">
     
                 <!-- (Из какой(-их) категории, Кол-во постов на странице, Какой категорией подписывать превьюшки, Какой пост исключить)  -->

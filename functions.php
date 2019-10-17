@@ -1091,4 +1091,11 @@ function secureData($data) {
 	return $data;
 }
 
+//По переданной дате в формтате 20.10.2019 возвращаем 20 жовтня 2019
+function ukrainianDate($date){
+	$monthArray = ['', 'Січня', 'Лютого', 'Березня', 'Квітня', 'Травня', 'Червня', 'Липня', 'Серпня', 'Вересня', 'Жовтня', 'Листопад', 'Грудня'];
+	$dateArray = explode('.', $date);
+	return $dateArray[0] . ' ' . $monthArray[(int)$dateArray[1]] . ' ' . $dateArray[2];
+}
+
  ?>

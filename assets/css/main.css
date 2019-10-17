@@ -512,7 +512,7 @@ main {
   width: 33%;
   position: relative;
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 100;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -546,7 +546,8 @@ main {
 }
 .info-block__team-title {
   padding-right: 3px;
-  font-weight: 100;
+  font-weight: 800;
+  /* font-weight: 100; */
 }
 .info-block__team-title--uppercase {
   font-weight: 600;
